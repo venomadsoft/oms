@@ -1,0 +1,82 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myCustomerGroupLabel">Create or edit a CustomerGroup</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="customerGroup.id" readonly />
+        </div>
+        <div class="form-group">
+            <label for="field_code">Code</label>
+            <input type="text" class="form-control" name="code" id="field_code"
+                    ng-model="customerGroup.code"
+                    required ng-maxlength="10" />
+            <div ng-show="editForm.code.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.code.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.code.$error.maxlength" translate-value-max="10">
+                    This field cannot be longer than 10 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="customerGroup.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label for="field_freight">Freight</label>
+            <input type="number" class="form-control" name="freight" id="field_freight"
+                    ng-model="customerGroup.freight"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_priceList">priceList</label>
+            <select class="form-control" id="field_priceList" name="priceList" ng-model="customerGroup.priceList" ng-options="priceList as priceList.id for priceList in pricelists track by priceList.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_mill">mill</label>
+            <select class="form-control" id="field_mill" name="mill" ng-model="customerGroup.mill" ng-options="mill as mill.code for mill in mills track by mill.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_customers">customers</label>
+            <select class="form-control" id="field_customers" multiple name="customers" ng-model="customerGroup.customerss" ng-options="customer as customer.code for customer in customers track by customer.id"></select>
+        </div>
+        <div class="form-group">
+            <label for="field_notes">notes</label>
+            <select class="form-control" id="field_notes" name="notes" ng-model="customerGroup.notes" ng-options="noteSet as noteSet.id for noteSet in notess | orderBy:'id' track by noteSet.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_formulae">formulae</label>
+            <select class="form-control" id="field_formulae" name="formulae" ng-model="customerGroup.formulae" ng-options="formulae as formulae.id for formulae in formulaes | orderBy:'id' track by formulae.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

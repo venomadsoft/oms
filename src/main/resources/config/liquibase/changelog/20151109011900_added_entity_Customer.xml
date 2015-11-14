@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle"/>
+
+    <!--
+        Added the entity Customer.
+    -->
+    <changeSet id="20151109011900" author="jhipster">
+        <createTable tableName="customer">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="code" type="varchar(10)">
+                <constraints nullable="false" />
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="addresses_id" type="bigint">
+                <constraints unique="true"/>
+            </column>
+            <column name="notes_id" type="bigint">
+                <constraints unique="true"/>
+            </column>
+            <column name="formulae_id" type="bigint">
+                <constraints unique="true"/>
+            </column>
+        </createTable>
+        
+        <addForeignKeyConstraint baseColumnNames="addresses_id"
+                                 baseTableName="customer"
+                                 constraintName="fk_customer_addresses_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="addresses"/>
+
+        <addForeignKeyConstraint baseColumnNames="notes_id"
+                                 baseTableName="customer"
+                                 constraintName="fk_customer_notes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="note_set"/>
+
+        <addForeignKeyConstraint baseColumnNames="formulae_id"
+                                 baseTableName="customer"
+                                 constraintName="fk_customer_formulae_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="formulae"/>
+
+    </changeSet>
+</databaseChangeLog>

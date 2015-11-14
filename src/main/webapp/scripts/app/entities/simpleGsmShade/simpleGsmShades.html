@@ -1,0 +1,56 @@
+<div>
+    <h2>SimpleGsmShades</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="simpleGsmShade.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new SimpleGsmShade</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>MinGsm</th>
+                    <th>MaxGsm</th>
+                    <th>Shade</th>
+                    <th>mill</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="simpleGsmShade in simpleGsmShades track by simpleGsmShade.id">
+                    <td><a ui-sref="simpleGsmShade.detail({id:simpleGsmShade.id})">{{simpleGsmShade.id}}</a></td>
+                    <td>{{simpleGsmShade.minGsm}}</td>
+                    <td>{{simpleGsmShade.maxGsm}}</td>
+                    <td>{{simpleGsmShade.shade}}</td>
+                    <td>
+                        <a ui-sref="mill.detail({id:simpleGsmShade.mill.id})">{{simpleGsmShade.mill.code}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="simpleGsmShade.detail({id:simpleGsmShade.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="simpleGsmShade.edit({id:simpleGsmShade.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="simpleGsmShade.delete({id:simpleGsmShade.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

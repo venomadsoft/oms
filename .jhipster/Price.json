@@ -1,0 +1,49 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "quality",
+            "otherEntityName": "quality",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "label",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "price"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "simpleGsmShade",
+            "otherEntityName": "simpleGsmShade",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "shade",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "price"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "mill",
+            "otherEntityName": "mill",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "code"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "priceList",
+            "otherEntityName": "priceList",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "value",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20151109002516",
+    "dto": "no",
+    "pagination": "pagination"
+}

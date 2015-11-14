@@ -1,0 +1,46 @@
+
+<div>
+    <h2><span>PriceList</span> {{priceList.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>WefDateFrom</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{priceList.wefDateFrom | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>WefDateTo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{priceList.wefDateTo | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Active</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{priceList.active}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

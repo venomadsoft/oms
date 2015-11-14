@@ -1,0 +1,69 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "priceList",
+            "otherEntityName": "priceList",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "mill",
+            "otherEntityName": "mill",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "code"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "customers",
+            "otherEntityName": "customer",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "code",
+            "ownerSide": true
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "notes",
+            "otherEntityName": "noteSet",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "customerGroup"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "formulae",
+            "otherEntityName": "formulae",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "customerGroup"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "10"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "freight",
+            "fieldType": "Float"
+        }
+    ],
+    "changelogDate": "20151109011333",
+    "dto": "no",
+    "pagination": "pagination"
+}

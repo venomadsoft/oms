@@ -1,0 +1,46 @@
+<div>
+    <h2>NoteSets</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="noteSet.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new NoteSet</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="noteSet in noteSets track by noteSet.id">
+                    <td><a ui-sref="noteSet.detail({id:noteSet.id})">{{noteSet.id}}</a></td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="noteSet.detail({id:noteSet.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="noteSet.edit({id:noteSet.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="noteSet.delete({id:noteSet.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

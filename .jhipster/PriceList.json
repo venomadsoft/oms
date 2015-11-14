@@ -1,0 +1,58 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "prices",
+            "otherEntityName": "price",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "priceList"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "taxes",
+            "otherEntityName": "tax",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "priceList"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "groups",
+            "otherEntityName": "customerGroup",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "priceList"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "derivedGsmShades",
+            "otherEntityName": "derivedGsmShade",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "priceList"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "wefDateFrom",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "wefDateTo",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "active",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20151108235934",
+    "dto": "no",
+    "pagination": "pagination"
+}

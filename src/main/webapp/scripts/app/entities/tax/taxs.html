@@ -1,0 +1,56 @@
+<div>
+    <h2>Taxs</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="tax.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Tax</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Rate</th>
+                    <th>type</th>
+                    <th>priceList</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="tax in taxs track by tax.id">
+                    <td><a ui-sref="tax.detail({id:tax.id})">{{tax.id}}</a></td>
+                    <td>{{tax.rate}}</td>
+                    <td>
+                        <a ui-sref="taxType.detail({id:tax.type.id})">{{tax.type.label}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="priceList.detail({id:tax.priceList.id})">{{tax.priceList.id}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="tax.detail({id:tax.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="tax.edit({id:tax.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="tax.delete({id:tax.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

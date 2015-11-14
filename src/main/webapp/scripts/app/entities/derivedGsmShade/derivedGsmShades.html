@@ -1,0 +1,68 @@
+<div>
+    <h2>DerivedGsmShades</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="derivedGsmShade.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new DerivedGsmShade</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>MinGsm</th>
+                    <th>MaxGsm</th>
+                    <th>Shade</th>
+                    <th>formulae</th>
+                    <th>simpleGsmShade</th>
+                    <th>mill</th>
+                    <th>priceList</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="derivedGsmShade in derivedGsmShades track by derivedGsmShade.id">
+                    <td><a ui-sref="derivedGsmShade.detail({id:derivedGsmShade.id})">{{derivedGsmShade.id}}</a></td>
+                    <td>{{derivedGsmShade.minGsm}}</td>
+                    <td>{{derivedGsmShade.maxGsm}}</td>
+                    <td>{{derivedGsmShade.shade}}</td>
+                    <td>
+                        <a ui-sref="formulae.detail({id:derivedGsmShade.formulae.id})">{{derivedGsmShade.formulae.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="simpleGsmShade.detail({id:derivedGsmShade.simpleGsmShade.id})">{{derivedGsmShade.simpleGsmShade.shade}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="mill.detail({id:derivedGsmShade.mill.id})">{{derivedGsmShade.mill.code}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="priceList.detail({id:derivedGsmShade.priceList.id})">{{derivedGsmShade.priceList.id}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="derivedGsmShade.detail({id:derivedGsmShade.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="derivedGsmShade.edit({id:derivedGsmShade.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="derivedGsmShade.delete({id:derivedGsmShade.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

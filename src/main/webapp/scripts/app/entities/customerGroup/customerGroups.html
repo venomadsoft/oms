@@ -1,0 +1,81 @@
+<div>
+    <h2>CustomerGroups</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="customerGroup.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new CustomerGroup</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Freight</th>
+                    <th>priceList</th>
+                    <th>mill</th>
+                    <th>notes</th>
+                    <th>formulae</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="customerGroup in customerGroups track by customerGroup.id">
+                    <td><a ui-sref="customerGroup.detail({id:customerGroup.id})">{{customerGroup.id}}</a></td>
+                    <td>{{customerGroup.code}}</td>
+                    <td>{{customerGroup.name}}</td>
+                    <td>{{customerGroup.freight}}</td>
+                    <td>
+                        <a ui-sref="priceList.detail({id:customerGroup.priceList.id})">{{customerGroup.priceList.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="mill.detail({id:customerGroup.mill.id})">{{customerGroup.mill.code}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="noteSet.detail({id:customerGroup.notes.id})">{{customerGroup.notes.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="formulae.detail({id:customerGroup.formulae.id})">{{customerGroup.formulae.id}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="customerGroup.detail({id:customerGroup.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="customerGroup.edit({id:customerGroup.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="customerGroup.delete({id:customerGroup.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination">
+                <li ng-show="links['first'] >= 0" ng-click="loadPage(links['first'])"><a>&lt;&lt;</a></li>
+                <li ng-show="page > 0" ng-click="loadPage(links['prev'] || 0)"><a>&lt;</a></li>
+                <li ng-show="page > 1" ng-click="loadPage(page - 2)"><a>{{page - 1}}</a></li>
+                <li ng-show="page > 0" ng-click="loadPage(page - 1)"><a>{{page}}</a></li>
+                <li class="active"><a>{{page + 1}}</a></li>
+                <li ng-show="page < links['last']" ng-click="loadPage(page + 1)"><a>{{page + 2}}</a></li>
+                <li ng-show="page < links['last'] - 1" ng-click="loadPage(page + 2)"><a>{{page + 3}}</a></li>
+                <li ng-show="links['next']" ng-click="loadPage(links['next'])"><a>&gt;</a></li>
+                <li ng-show="links['last'] > 0" ng-click="loadPage(links['last'])"><a>&gt;&gt;</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div>
+    <h2>Notes</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="note.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Note</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>type</th>
+                    <th>noteSet</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="note in notes track by note.id">
+                    <td><a ui-sref="note.detail({id:note.id})">{{note.id}}</a></td>
+                    <td>
+                        <a ui-sref="noteType.detail({id:note.type.id})">{{note.type.label}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="noteSet.detail({id:note.noteSet.id})">{{note.noteSet.id}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="note.detail({id:note.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="note.edit({id:note.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="note.delete({id:note.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

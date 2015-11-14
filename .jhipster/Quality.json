@@ -1,0 +1,24 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "mill",
+            "otherEntityName": "mill",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "code"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "label",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20151108233058",
+    "dto": "no",
+    "pagination": "no"
+}

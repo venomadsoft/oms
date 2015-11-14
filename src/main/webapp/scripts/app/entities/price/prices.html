@@ -1,0 +1,77 @@
+<div>
+    <h2>Prices</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="price.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Price</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Value</th>
+                    <th>quality</th>
+                    <th>simpleGsmShade</th>
+                    <th>mill</th>
+                    <th>priceList</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="price in prices track by price.id">
+                    <td><a ui-sref="price.detail({id:price.id})">{{price.id}}</a></td>
+                    <td>{{price.value}}</td>
+                    <td>
+                        <a ui-sref="quality.detail({id:price.quality.id})">{{price.quality.label}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="simpleGsmShade.detail({id:price.simpleGsmShade.id})">{{price.simpleGsmShade.shade}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="mill.detail({id:price.mill.id})">{{price.mill.code}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="priceList.detail({id:price.priceList.id})">{{price.priceList.id}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="price.detail({id:price.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="price.edit({id:price.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="price.delete({id:price.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination">
+                <li ng-show="links['first'] >= 0" ng-click="loadPage(links['first'])"><a>&lt;&lt;</a></li>
+                <li ng-show="page > 0" ng-click="loadPage(links['prev'] || 0)"><a>&lt;</a></li>
+                <li ng-show="page > 1" ng-click="loadPage(page - 2)"><a>{{page - 1}}</a></li>
+                <li ng-show="page > 0" ng-click="loadPage(page - 1)"><a>{{page}}</a></li>
+                <li class="active"><a>{{page + 1}}</a></li>
+                <li ng-show="page < links['last']" ng-click="loadPage(page + 1)"><a>{{page + 2}}</a></li>
+                <li ng-show="page < links['last'] - 1" ng-click="loadPage(page + 2)"><a>{{page + 3}}</a></li>
+                <li ng-show="links['next']" ng-click="loadPage(links['next'])"><a>&gt;</a></li>
+                <li ng-show="links['last'] > 0" ng-click="loadPage(links['last'])"><a>&gt;&gt;</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

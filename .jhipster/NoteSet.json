@@ -1,0 +1,15 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "notes",
+            "otherEntityName": "note",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "noteSet"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20151108213152",
+    "dto": "no",
+    "pagination": "no"
+}

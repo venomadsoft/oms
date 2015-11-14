@@ -1,0 +1,94 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myDerivedGsmShadeLabel">Create or edit a DerivedGsmShade</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="derivedGsmShade.id" readonly />
+        </div>
+        <div class="form-group">
+            <label for="field_minGsm">MinGsm</label>
+            <input type="number" class="form-control" name="minGsm" id="field_minGsm"
+                    ng-model="derivedGsmShade.minGsm"
+                    required />
+            <div ng-show="editForm.minGsm.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.minGsm.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.minGsm.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="field_maxGsm">MaxGsm</label>
+            <input type="number" class="form-control" name="maxGsm" id="field_maxGsm"
+                    ng-model="derivedGsmShade.maxGsm"
+                    required />
+            <div ng-show="editForm.maxGsm.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.maxGsm.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.maxGsm.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="field_shade">Shade</label>
+            <input type="text" class="form-control" name="shade" id="field_shade"
+                    ng-model="derivedGsmShade.shade"
+                    required />
+            <div ng-show="editForm.shade.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.shade.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_formulae">formulae</label>
+            <select class="form-control" id="field_formulae" name="formulae" ng-model="derivedGsmShade.formulae" ng-options="formulae as formulae.id for formulae in formulaes | orderBy:'id' track by formulae.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_simpleGsmShade">simpleGsmShade</label>
+            <select class="form-control" id="field_simpleGsmShade" name="simpleGsmShade" ng-model="derivedGsmShade.simpleGsmShade" ng-options="simpleGsmShade as simpleGsmShade.shade for simpleGsmShade in simplegsmshades | orderBy:'id' track by simpleGsmShade.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_mill">mill</label>
+            <select class="form-control" id="field_mill" name="mill" ng-model="derivedGsmShade.mill" ng-options="mill as mill.code for mill in mills track by mill.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_priceList">priceList</label>
+            <select class="form-control" id="field_priceList" name="priceList" ng-model="derivedGsmShade.priceList" ng-options="priceList as priceList.id for priceList in pricelists track by priceList.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

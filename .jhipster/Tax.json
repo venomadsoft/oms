@@ -1,0 +1,31 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "type",
+            "otherEntityName": "taxType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "label"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "priceList",
+            "otherEntityName": "priceList",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "rate",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20151109001452",
+    "dto": "no",
+    "pagination": "no"
+}

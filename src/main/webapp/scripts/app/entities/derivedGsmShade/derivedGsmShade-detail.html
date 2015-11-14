@@ -1,0 +1,78 @@
+
+<div>
+    <h2><span>DerivedGsmShade</span> {{derivedGsmShade.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>MinGsm</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{derivedGsmShade.minGsm}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MaxGsm</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{derivedGsmShade.maxGsm}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Shade</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{derivedGsmShade.shade}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>formulae</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="formulae.detail({id:derivedGsmShade.formulae.id})">{{derivedGsmShade.formulae.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>simpleGsmShade</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="simpleGsmShade.detail({id:derivedGsmShade.simpleGsmShade.id})">{{derivedGsmShade.simpleGsmShade.shade}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>mill</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="mill.detail({id:derivedGsmShade.mill.id})">{{derivedGsmShade.mill.code}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>priceList</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="priceList.detail({id:derivedGsmShade.priceList.id})">{{derivedGsmShade.priceList.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

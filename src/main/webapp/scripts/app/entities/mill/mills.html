@@ -1,0 +1,58 @@
+<div>
+    <h2>Mills</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="mill.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Mill</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>addresses</th>
+                    <th>notes</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="mill in mills track by mill.id">
+                    <td><a ui-sref="mill.detail({id:mill.id})">{{mill.id}}</a></td>
+                    <td>{{mill.code}}</td>
+                    <td>{{mill.name}}</td>
+                    <td>
+                        <a ui-sref="addresses.detail({id:mill.addresses.id})">{{mill.addresses.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="noteSet.detail({id:mill.notes.id})">{{mill.notes.id}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="mill.detail({id:mill.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="mill.edit({id:mill.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="mill.delete({id:mill.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

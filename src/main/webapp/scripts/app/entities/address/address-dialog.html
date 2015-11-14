@@ -1,0 +1,62 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myAddressLabel">Create or edit a Address</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="address.id" readonly />
+        </div>
+        <div class="form-group">
+            <label for="field_city">City</label>
+            <input type="text" class="form-control" name="city" id="field_city"
+                    ng-model="address.city"
+                     />
+        </div>
+        <div class="form-group">
+            <label for="field_country">Country</label>
+            <input type="text" class="form-control" name="country" id="field_country"
+                    ng-model="address.country"
+                     />
+        </div>
+        <div class="form-group">
+            <label for="field_state">State</label>
+            <input type="text" class="form-control" name="state" id="field_state"
+                    ng-model="address.state"
+                     />
+        </div>
+        <div class="form-group">
+            <label for="field_zip">Zip</label>
+            <input type="text" class="form-control" name="zip" id="field_zip"
+                    ng-model="address.zip"
+                     />
+        </div>
+        <div class="form-group">
+            <label for="field_type">Type</label>
+            <input type="text" class="form-control" name="type" id="field_type"
+                    ng-model="address.type"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_parent">parent</label>
+            <select class="form-control" id="field_parent" name="parent" ng-model="address.parent" ng-options="addresses as addresses.id for addresses in addressess track by addresses.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

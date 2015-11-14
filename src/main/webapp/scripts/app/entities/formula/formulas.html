@@ -1,0 +1,54 @@
+<div>
+    <h2>Formulas</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="formula.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Formula</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Operator</th>
+                    <th>Operand</th>
+                    <th>parent</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="formula in formulas track by formula.id">
+                    <td><a ui-sref="formula.detail({id:formula.id})">{{formula.id}}</a></td>
+                    <td>{{formula.operator}}</td>
+                    <td>{{formula.operand}}</td>
+                    <td>
+                        <a ui-sref="formulae.detail({id:formula.parent.id})">{{formula.parent.id}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="formula.detail({id:formula.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="formula.edit({id:formula.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="formula.delete({id:formula.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

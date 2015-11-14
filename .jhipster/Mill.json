@@ -1,0 +1,80 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "addresses",
+            "otherEntityName": "addresses",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "mill"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "notes",
+            "otherEntityName": "noteSet",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "mill"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "prices",
+            "otherEntityName": "price",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "mill"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "qualities",
+            "otherEntityName": "quality",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "mill"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "simpleGsmShades",
+            "otherEntityName": "simpleGsmShade",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "mill"
+        },
+        {
+            "relationshipId": 6,
+            "relationshipName": "groups",
+            "otherEntityName": "customerGroup",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "mill"
+        },
+        {
+            "relationshipId": 7,
+            "relationshipName": "derivedGsmShades",
+            "otherEntityName": "derivedGsmShade",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "mill"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "10"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20151108232545",
+    "dto": "no",
+    "pagination": "no"
+}
