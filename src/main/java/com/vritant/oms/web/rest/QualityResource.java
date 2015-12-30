@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.vritant.oms.domain.Quality;
 import com.vritant.oms.repository.QualityRepository;
 import com.vritant.oms.web.rest.util.HeaderUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing Quality.
@@ -86,7 +89,7 @@ public class QualityResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<Quality> getAllMillQualitys(@PathVariable Long id) {
+    public Set<Quality> getAllMillQualitys(@PathVariable Long id) {
         log.debug("REST request to get all Qualitys of Mill: {}", id);
         return qualityRepository.findByMillId(id);
     }

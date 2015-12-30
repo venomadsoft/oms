@@ -42,7 +42,6 @@ public class Mill implements Serializable {
     private Set<Price> pricess = new HashSet<>();
 
     @OneToMany(mappedBy = "mill")
-    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Quality> qualitiess = new HashSet<>();
 
