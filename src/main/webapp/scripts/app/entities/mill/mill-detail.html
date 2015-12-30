@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>Mill</span> {{mill.id}}</h2>
+    <h2>{{mill.code}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -37,11 +37,31 @@
             <tr>
                 <td rowspan="{{mill.qualitiess.length+1}}">
                     <span>qualities</span>
+                    <button class="btn btn-primary" ui-sref="quality.new">
+                        <span class="glyphicon glyphicon-flash"></span> <span>Create new</span>
+                    </button>
                 </td>
             </tr>
             <tr ng-repeat="quality in mill.qualitiess">
                 <td>
+                    <button type="submit"
+                        ui-sref="quality.detail({id:quality.id})"
+                        class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                    </button>
+                    <button type="submit"
+                        ui-sref="quality.edit({id:quality.id})"
+                        class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                    </button>
+                    <button type="submit"
+                        ui-sref="quality.delete({id:quality.id})"
+                        class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                    </button>
+                    </span>&nbsp;&nbsp;&nbsp;<span>
                     <a class="form-control-static" ui-sref="quality.detail({id:quality.id})">{{quality.label}}</a>
+
                 </td>
             </tr>
             <tr>
