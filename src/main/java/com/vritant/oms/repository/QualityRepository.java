@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface QualityRepository extends JpaRepository<Quality,Long> {
 
+	public List<Quality> findByMillId(Long id);
 }

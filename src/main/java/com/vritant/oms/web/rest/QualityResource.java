@@ -80,6 +80,18 @@ public class QualityResource {
     }
 
     /**
+     * GET  mill/:id/qualitys -> get all the qualitys if the mill "id".
+     */
+    @RequestMapping(value = "mill/{id}/qualitys",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Quality> getAllMillQualitys(@PathVariable Long id) {
+        log.debug("REST request to get all Qualitys of Mill: {}", id);
+        return qualityRepository.findByMillId(id);
+    }
+
+    /**
      * GET  /qualitys/:id -> get the "id" quality.
      */
     @RequestMapping(value = "/qualitys/{id}",
