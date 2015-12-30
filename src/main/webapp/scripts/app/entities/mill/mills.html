@@ -15,25 +15,15 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Code</th>
                     <th>Name</th>
-                    <th>addresses</th>
-                    <th>notes</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="mill in mills track by mill.id">
-                    <td><a ui-sref="mill.detail({id:mill.id})">{{mill.id}}</a></td>
-                    <td>{{mill.code}}</td>
+                    <td><a ui-sref="mill.detail({id:mill.id})">{{mill.code}}</a></td>
                     <td>{{mill.name}}</td>
-                    <td>
-                        <a ui-sref="addresses.detail({id:mill.addresses.id})">{{mill.addresses.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="noteSet.detail({id:mill.notes.id})">{{mill.notes.id}}</a>
-                    </td>
                     <td>
                         <button type="submit"
                                 ui-sref="mill.detail({id:mill.id})"
