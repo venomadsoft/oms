@@ -41,6 +41,10 @@ To ensure everything worked, run:
 
 Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 
+#High level description
+This application is been designed to provide pricelist to the Core members where in add mill/customer, products and pricing with respect to individual product
+
+
 # Testing
 
 Unit tests are run by [Karma][] and written with [Jasmine][]. They're located in `src/test/javascript` and can be run with:
