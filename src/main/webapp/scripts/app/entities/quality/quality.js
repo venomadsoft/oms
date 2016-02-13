@@ -58,7 +58,7 @@ angular.module('omsApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('quality', null, { reload: true });
+                        $state.go('mill.detail', {id: result.mill.id}, { reload: true });
                     }, function() {
                         $state.go('quality');
                     })
@@ -81,7 +81,7 @@ angular.module('omsApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('quality', null, { reload: true });
+                        $state.go('mill.detail', {id: result.mill.id}, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
@@ -89,7 +89,7 @@ angular.module('omsApp')
             })
             .state('quality.delete', {
                 parent: 'quality',
-                url: '/{id}/delete',
+                url: '/{id}/delete/{millId}',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -104,7 +104,7 @@ angular.module('omsApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('quality', null, { reload: true });
+                        $state.go('mill.detail', {id: $stateParams.millId});
                     }, function() {
                         $state.go('^');
                     })
