@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="megha (generated)" id="1455357562873-1">
+        <addColumn tableName="note">
+            <column name="noteSet_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-2">
+        <addColumn tableName="jhi_user">
+            <column name="password" type="varchar(60)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-3">
+        <addColumn tableName="customer_group">
+            <column name="priceList_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-4">
+        <addColumn tableName="derived_gsm_shade">
+            <column name="priceList_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-5">
+        <addColumn tableName="price">
+            <column name="priceList_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-6">
+        <addColumn tableName="tax">
+            <column name="priceList_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-7">
+        <addColumn tableName="derived_gsm_shade">
+            <column name="simpleGsmShade_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-8">
+        <addColumn tableName="price">
+            <column name="simpleGsmShade_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-9">
+        <addForeignKeyConstraint baseColumnNames="noteSet_id" baseTableName="note" constraintName="FK_1822fuc3cojplowpjp7gpmlba" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="note_set"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-10">
+        <addForeignKeyConstraint baseColumnNames="priceList_id" baseTableName="customer_group" constraintName="FK_1fmy9hhxxmt5hxy5x0tgan59l" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="price_list"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-11">
+        <addForeignKeyConstraint baseColumnNames="priceList_id" baseTableName="tax" constraintName="FK_bdhbdon2970k26kvq7vjv12ii" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="price_list"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-12">
+        <addForeignKeyConstraint baseColumnNames="priceList_id" baseTableName="price" constraintName="FK_jxfgo2yj4y5vaqtpig1uo0oqq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="price_list"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-13">
+        <addForeignKeyConstraint baseColumnNames="simpleGsmShade_id" baseTableName="price" constraintName="FK_kdxpamgaetqc7n8d586bbj83k" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="simple_gsm_shade"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-14">
+        <addForeignKeyConstraint baseColumnNames="priceList_id" baseTableName="derived_gsm_shade" constraintName="FK_rrtk3typ2gwcp3fpdt78ceryj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="price_list"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-15">
+        <addForeignKeyConstraint baseColumnNames="simpleGsmShade_id" baseTableName="derived_gsm_shade" constraintName="FK_stcleudpgs0mn6px8qauiteqa" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="simple_gsm_shade"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-16">
+        <dropForeignKeyConstraint baseTableName="customer_group" constraintName="fk_customergroup_pricelist_id"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-17">
+        <dropForeignKeyConstraint baseTableName="derived_gsm_shade" constraintName="fk_derivedgsmshade_pricelist_id"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-18">
+        <dropForeignKeyConstraint baseTableName="derived_gsm_shade" constraintName="fk_derivedgsmshade_simplegsmshade_id"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-19">
+        <dropForeignKeyConstraint baseTableName="note" constraintName="fk_note_noteset_id"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-20">
+        <dropForeignKeyConstraint baseTableName="price" constraintName="fk_price_pricelist_id"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-21">
+        <dropForeignKeyConstraint baseTableName="price" constraintName="fk_price_simplegsmshade_id"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-22">
+        <dropForeignKeyConstraint baseTableName="tax" constraintName="fk_tax_pricelist_id"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-23">
+        <dropUniqueConstraint constraintName="addresses_id" tableName="customer"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-24">
+        <dropUniqueConstraint constraintName="addresses_id" tableName="mill"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-25">
+        <dropUniqueConstraint constraintName="addresses_id_2" tableName="mill"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-26">
+        <dropUniqueConstraint constraintName="formulae_id" tableName="customer"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-27">
+        <dropUniqueConstraint constraintName="formulae_id" tableName="customer_group"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-28">
+        <dropUniqueConstraint constraintName="formulae_id" tableName="derived_gsm_shade"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-29">
+        <dropUniqueConstraint constraintName="notes_id" tableName="customer"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-30">
+        <dropUniqueConstraint constraintName="notes_id" tableName="customer_group"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-31">
+        <dropUniqueConstraint constraintName="notes_id" tableName="mill"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-32">
+        <dropUniqueConstraint constraintName="simple_gsm_shade_id" tableName="derived_gsm_shade"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-33">
+        <dropColumn columnName="note_set_id" tableName="note"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-34">
+        <dropColumn columnName="price_list_id" tableName="customer_group"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-35">
+        <dropColumn columnName="price_list_id" tableName="derived_gsm_shade"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-36">
+        <dropColumn columnName="price_list_id" tableName="price"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-37">
+        <dropColumn columnName="price_list_id" tableName="tax"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-38">
+        <dropColumn columnName="simple_gsm_shade_id" tableName="derived_gsm_shade"/>
+    </changeSet>
+    <changeSet author="megha (generated)" id="1455357562873-39">
+        <dropColumn columnName="simple_gsm_shade_id" tableName="price"/>
+    </changeSet>
+</databaseChangeLog>
