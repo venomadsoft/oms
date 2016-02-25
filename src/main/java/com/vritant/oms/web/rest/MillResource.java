@@ -3,6 +3,7 @@ package com.vritant.oms.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.vritant.oms.domain.Mill;
 import com.vritant.oms.repository.MillRepository;
+import com.vritant.oms.repository.QualityRepository;
 import com.vritant.oms.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,9 @@ public class MillResource {
         
     @Inject
     private MillRepository millRepository;
-    
+    @Inject
+    private QualityRepository qualityRepository;
+
     /**
      * POST  /mills -> Create a new mill.
      */
@@ -88,10 +91,9 @@ public class MillResource {
     @Timed
     public ResponseEntity<Mill> getMill(@PathVariable Long id) {
         log.debug("REST request to get Mill : {}", id);
-        Mill mill = millRepository.findOne(id);
-        return Optional.ofNullable(mill)
-            .map(result -> new ResponseEntity<>(
-                result,
+        return Optional.ofNullable(resolveMill(millRepository.findOne(id)))
+            .map(mill -> new ResponseEntity<>(
+                mill,
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -107,5 +109,12 @@ public class MillResource {
         log.debug("REST request to delete Mill : {}", id);
         millRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("mill", id.toString())).build();
+    }
+
+    private Mill resolveMill(Mill mill) {
+        if(mill != null) {
+        mill.setQualitiess(qualityRepository.findByMillId(mill.getId()));
+        }
+        return mill;
     }
 }

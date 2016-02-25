@@ -21,7 +21,7 @@ angular.module('omsApp')
             })
             .state('quality.detail', {
                 parent: 'entity',
-                url: '/quality/{id}',
+                url: '/quality/{qualityId}',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'Quality'
@@ -34,13 +34,13 @@ angular.module('omsApp')
                 },
                 resolve: {
                     entity: ['$stateParams', 'Quality', function($stateParams, Quality) {
-                        return Quality.get({id : $stateParams.id});
+                        return Quality.get({id : $stateParams.qualityId});
                     }]
                 }
             })
             .state('quality.new', {
-                parent: 'quality',
-                url: '/new',
+                parent: 'mill.detail',
+                url: '/new/',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -58,15 +58,15 @@ angular.module('omsApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('quality', null, { reload: true });
+                        $state.go('^', {id: $stateParams.id}, {reload: true});
                     }, function() {
-                        $state.go('quality');
+                        $state.go('^', {id: $stateParams.id}, {reload: true});
                     })
                 }]
             })
             .state('quality.edit', {
-                parent: 'quality',
-                url: '/{id}/edit',
+                parent: 'mill.detail',
+                url: '/{qualityId}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -77,19 +77,19 @@ angular.module('omsApp')
                         size: 'lg',
                         resolve: {
                             entity: ['Quality', function(Quality) {
-                                return Quality.get({id : $stateParams.id});
+                                return Quality.get({id : $stateParams.qualityId});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('quality', null, { reload: true });
+                        $state.go('^', {id: $stateParams.id},{reload: true});
                     }, function() {
-                        $state.go('^');
+                        $state.go('^', {id: $stateParams.id},{reload: true});
                     })
                 }]
             })
             .state('quality.delete', {
-                parent: 'quality',
-                url: '/{id}/delete',
+                parent: 'mill.detail',
+                url: '/{qualityId}/delete',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -100,13 +100,13 @@ angular.module('omsApp')
                         size: 'md',
                         resolve: {
                             entity: ['Quality', function(Quality) {
-                                return Quality.get({id : $stateParams.id});
+                                return Quality.get({id : $stateParams.qualityId});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('quality', null, { reload: true });
+                        $state.go('^', {id: $stateParams.id},{reload: true});
                     }, function() {
-                        $state.go('^');
+                        $state.go('^', {id: $stateParams.id},{reload: true});
                     })
                 }]
             });

@@ -7,7 +7,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Objects;
 
@@ -44,9 +46,8 @@ public class Mill implements Serializable {
     private Set<Price> pricess = new HashSet<>();
 
     @OneToMany(mappedBy = "mill")
-    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Quality> qualitiess = new HashSet<>();
+    private List<Quality> qualitiess = new ArrayList<>();
 
     @OneToMany(mappedBy = "mill")
     @JsonIgnore
@@ -111,11 +112,11 @@ public class Mill implements Serializable {
         this.pricess = prices;
     }
 
-    public Set<Quality> getQualitiess() {
+    public List<Quality> getQualitiess() {
         return qualitiess;
     }
 
-    public void setQualitiess(Set<Quality> qualitys) {
+    public void setQualitiess(List<Quality> qualitys) {
         this.qualitiess = qualitys;
     }
 

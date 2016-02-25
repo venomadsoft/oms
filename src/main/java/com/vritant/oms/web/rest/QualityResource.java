@@ -18,6 +18,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing Quality.
@@ -78,6 +79,18 @@ public class QualityResource {
         log.debug("REST request to get all Qualitys");
         return qualityRepository.findAll();
             }
+
+    /**
+     * GET  mill/:id/qualitys -> get all the qualitys if the mill "id".
+     */
+    @RequestMapping(value = "mill/{id}/qualitys",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Quality> getAllMillQualitys(@PathVariable Long id) {
+        log.debug("REST request to get all Qualitys of Mill: {}", id);
+        return qualityRepository.findByMillId(id);
+    }
 
     /**
      * GET  /qualitys/:id -> get the "id" quality.

@@ -1,6 +1,7 @@
 
 <div>
-    <h2><span>Mill</span> {{mill.id}}</h2>
+    <h2>{{mill.code}}</h2>
+    <jh-alert></jh-alert>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -32,6 +33,29 @@
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="addresses.detail({id:mill.addresses.id})">{{mill.addresses.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="{{mill.qualitiess.length+1}}">
+                    <span>qualities</span>
+                    <button class="btn btn-primary btn-xs" ui-sref="quality.new()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </td>
+            </tr>
+            <tr ng-repeat="quality in mill.qualitiess">
+                <td>
+                    <a class="form-control-static" ui-sref="quality.detail({qualityId:quality.id})">{{quality.label}}</a>
+                    <button type="submit"
+                        ui-sref="quality.edit({qualityId:quality.id})"
+                        class="btn btn-primary btn-xs">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button type="submit"
+                        ui-sref="quality.delete({qualityId:quality.id})"
+                        class="btn btn-danger btn-xs">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                    </button>
                 </td>
             </tr>
             <tr>
