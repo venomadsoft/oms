@@ -1,0 +1,54 @@
+
+<div>
+    <h2><span>Mill</span> {{mill.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Code</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{mill.code}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Name</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{mill.name}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>addresses</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="addresses.detail({id:mill.addresses.id})">{{mill.addresses.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>notes</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="noteSet.detail({id:mill.notes.id})">{{mill.notes.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

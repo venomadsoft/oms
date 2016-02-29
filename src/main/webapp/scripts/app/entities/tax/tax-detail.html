@@ -1,0 +1,46 @@
+
+<div>
+    <h2><span>Tax</span> {{tax.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Rate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{tax.rate}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>type</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="taxType.detail({id:tax.type.id})">{{tax.type.label}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>priceList</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="priceList.detail({id:tax.priceList.id})">{{tax.priceList.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

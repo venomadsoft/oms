@@ -1,0 +1,88 @@
+
+<div>
+    <h2><span>CustomerGroup</span> {{customerGroup.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Code</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customerGroup.code}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Name</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customerGroup.name}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Freight</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customerGroup.freight}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>priceList</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="priceList.detail({id:customerGroup.priceList.id})">{{customerGroup.priceList.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>mill</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="mill.detail({id:customerGroup.mill.id})">{{customerGroup.mill.code}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>customers</span>
+                </td>
+                <td>
+                    <span ng-repeat="customers in customerGroup.customerss">
+                        <a class="form-control-static" ui-sref="customer.detail({id: {{customers.id}}})">{{customers.code}}</a>{{$last ? '' : ', '}}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>notes</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="noteSet.detail({id:customerGroup.notes.id})">{{customerGroup.notes.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>formulae</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="formulae.detail({id:customerGroup.formulae.id})">{{customerGroup.formulae.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

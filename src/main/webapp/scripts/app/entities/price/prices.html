@@ -1,0 +1,75 @@
+<div>
+    <h2>Prices</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="price.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new Price
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="value"><span>Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="quality.label"><span>quality</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="simpleGsmShade.shade"><span>simpleGsmShade</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mill.code"><span>mill</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="priceList.id"><span>priceList</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="price in prices track by price.id">
+                    <td><a ui-sref="price.detail({id:price.id})">{{price.id}}</a></td>
+                    <td>{{price.value}}</td>
+                    <td>
+                        <a ui-sref="quality.detail({id:price.quality.id})">{{price.quality.label}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="simpleGsmShade.detail({id:price.simpleGsmShade.id})">{{price.simpleGsmShade.shade}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="mill.detail({id:price.mill.id})">{{price.mill.code}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="priceList.detail({id:price.priceList.id})">{{price.priceList.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="price.detail({id:price.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="price.edit({id:price.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="price.delete({id:price.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
+    </div>
+</div>

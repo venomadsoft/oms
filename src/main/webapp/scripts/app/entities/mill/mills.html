@@ -1,0 +1,66 @@
+<div>
+    <h2>Mills</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="mill.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new Mill
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Code</span></th>
+                    <th><span>Name</span></th>
+                    <th><span>addresses</span></th>
+                    <th><span>notes</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="mill in mills track by mill.id">
+                    <td><a ui-sref="mill.detail({id:mill.id})">{{mill.id}}</a></td>
+                    <td>{{mill.code}}</td>
+                    <td>{{mill.name}}</td>
+                    <td>
+                        <a ui-sref="addresses.detail({id:mill.addresses.id})">{{mill.addresses.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="noteSet.detail({id:mill.notes.id})">{{mill.notes.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="mill.detail({id:mill.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="mill.edit({id:mill.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="mill.delete({id:mill.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

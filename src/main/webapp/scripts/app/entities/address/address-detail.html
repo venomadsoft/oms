@@ -1,0 +1,70 @@
+
+<div>
+    <h2><span>Address</span> {{address.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>City</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{address.city}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Country</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{address.country}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>State</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{address.state}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Zip</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{address.zip}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Type</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{address.type}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>parent</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="addresses.detail({id:address.parent.id})">{{address.parent.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

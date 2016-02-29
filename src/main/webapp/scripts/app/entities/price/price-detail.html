@@ -1,0 +1,62 @@
+
+<div>
+    <h2><span>Price</span> {{price.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Value</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{price.value}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>quality</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="quality.detail({id:price.quality.id})">{{price.quality.label}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>simpleGsmShade</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="simpleGsmShade.detail({id:price.simpleGsmShade.id})">{{price.simpleGsmShade.shade}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>mill</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="mill.detail({id:price.mill.id})">{{price.mill.code}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>priceList</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="priceList.detail({id:price.priceList.id})">{{price.priceList.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

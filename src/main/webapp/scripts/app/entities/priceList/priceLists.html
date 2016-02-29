@@ -1,0 +1,63 @@
+<div>
+    <h2>PriceLists</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="priceList.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new PriceList
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="wefDateFrom"><span>WefDateFrom</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="wefDateTo"><span>WefDateTo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="active"><span>Active</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="priceList in priceLists track by priceList.id">
+                    <td><a ui-sref="priceList.detail({id:priceList.id})">{{priceList.id}}</a></td>
+                        <td>{{priceList.wefDateFrom | date:'mediumDate'}}</td>
+                        <td>{{priceList.wefDateTo | date:'mediumDate'}}</td>
+                    <td>{{priceList.active}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="priceList.detail({id:priceList.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="priceList.edit({id:priceList.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="priceList.delete({id:priceList.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
+    </div>
+</div>
