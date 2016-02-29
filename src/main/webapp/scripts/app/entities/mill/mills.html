@@ -18,25 +18,15 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr>
-                    <th><span>ID</span></th>
                     <th><span>Code</span></th>
                     <th><span>Name</span></th>
-                    <th><span>addresses</span></th>
-                    <th><span>notes</span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="mill in mills track by mill.id">
-                    <td><a ui-sref="mill.detail({id:mill.id})">{{mill.id}}</a></td>
-                    <td>{{mill.code}}</td>
+                    <td><a ui-sref="mill.detail({id:mill.id})">{{mill.code}}</a></td>
                     <td>{{mill.name}}</td>
-                    <td>
-                        <a ui-sref="addresses.detail({id:mill.addresses.id})">{{mill.addresses.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="noteSet.detail({id:mill.notes.id})">{{mill.notes.id}}</a>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
