@@ -12,7 +12,7 @@
             "relationshipName": "prices",
             "otherEntityName": "price",
             "relationshipType": "one-to-many",
-            "otherEntityRelationshipName": "qualilty"
+            "otherEntityRelationshipName": "quality"
         }
     ],
     "fields": [
