@@ -1,0 +1,29 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "type",
+            "otherEntityName": "noteType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "label"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "lines",
+            "otherEntityName": "line",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "note"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "noteSet",
+            "otherEntityName": "noteSet",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20151108213832",
+    "dto": "no",
+    "pagination": "no"
+}

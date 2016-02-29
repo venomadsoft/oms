@@ -1,0 +1,15 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "children",
+            "otherEntityName": "formula",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "parent"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20151108220538",
+    "dto": "no",
+    "pagination": "no"
+}

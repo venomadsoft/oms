@@ -1,0 +1,47 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "mill",
+            "otherEntityName": "mill",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "code"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "prices",
+            "otherEntityName": "price",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "simpleGsmShade"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "minGsm",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "maxGsm",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "shade",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20151108233708",
+    "dto": "no",
+    "pagination": "no"
+}
