@@ -22,8 +22,8 @@ spring:
         driver-class-name: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
         url: jdbc:mysql://localhost:3306/oms?useUnicode=true&characterEncoding=utf8
         name:
-        username: root
-        password:
+        username: oms
+        password: oms
     jpa:
         database-platform: org.hibernate.dialect.MySQLInnoDBDialect
         database: MYSQL
