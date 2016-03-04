@@ -12,6 +12,7 @@ sgs_api = swagger_client.SimplegsmshaderesourceApi()
 customer_api = swagger_client.CustomerresourceApi()
 pricelist_api = swagger_client.PricelistresourceApi()
 customer_group_api = swagger_client.CustomergroupresourceApi()
+price_api = swagger_client.PriceresourceApi()
 
 size = 3
 fruit = ('apple', 'banana', 'cherry', 'date', 'elderberry',
@@ -71,6 +72,18 @@ def create_customer_group(mill, plist, customers):
     group = customer_group_api.create_customer_group_using_post(group)
     return group
 
+def create_price(mill, plist, quality, sgs):
+    price = swagger_client.Price()
+    price.quality = quality
+    price.simple_gsm_shade = sgs
+    price.mill = mill
+    price.price_list = plist
+    price.value = random.choice(number)
+    print "Creating Price: %s for Mill: %s Quality: %s gsmShade: %s price list: %s" % (price.value, mill.code, quality.id, sgs.shade, plist.id)
+    return price_api.create_price_using_post(price)
+
+all_sgs = []
+
 def create_mill():
     mill = swagger_client.Mill()
     mill.name = random_name()
@@ -90,8 +103,8 @@ def create_mill():
         sgs.max_gsm = randint(0, 500)
         sgs.mill = mill
         print "Creating SimpleGsmShade: %s(%s-%s) for Mill: %s" % (sgs.shade, sgs.min_gsm, sgs.max_gsm, mill.name)
-        sgs_api.create_simple_gsm_shade_using_post(sgs)
-    return mill
+        all_sgs.append(sgs_api.create_simple_gsm_shade_using_post(sgs))
+    return mill_api.get_mill_using_get(mill.id)
 
 mills = []
 for i in range(0, size):
@@ -105,9 +118,13 @@ plists = []
 for i in range(0, size):
     plists.append(create_price_list())
 
+#Update this once mill GUI controls sgs
 for mill in mills:
     for plist in plists:
         index = randint(0, size * 10 - 3)
         create_customer_group(mill, plist, customers[index:index+3]);
-
+        for quality in mill.qualitiess:
+            for sgs in all_sgs:
+                if(sgs.mill.id == mill.id):
+                    create_price(mill, plist, quality, sgs)
 
