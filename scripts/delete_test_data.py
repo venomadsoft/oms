@@ -12,6 +12,8 @@ sgs_api = swagger_client.SimplegsmshaderesourceApi()
 customer_api = swagger_client.CustomerresourceApi()
 customer_group_api = swagger_client.CustomergroupresourceApi()
 price_list_api = swagger_client.PricelistresourceApi()
+taxtype_api = swagger_client.TaxtyperesourceApi()
+tax_api = swagger_client.TaxresourceApi()
 
 while True:
     prices = price_api.get_all_prices_using_get()
@@ -44,6 +46,14 @@ while True:
     for group in groups:
         print "Deleting Customer Group: %s" % group.name
         customer_group_api.delete_customer_group_using_delete(group.id)
+        
+while True:
+    tax = tax_api.get_all_taxs_using_get()
+    if not tax:
+        break
+    for tax in tax:
+        print "Deleting Tax: %s" % tax.type
+        tax_api.delete_tax_using_delete(tax.id)
 
 while True:
     plists = price_list_api.get_all_price_lists_using_get()
@@ -68,3 +78,14 @@ while True:
     for customer in customers:
         print "Deleting Customer: %s" % customer.name
         customer_api.delete_customer_using_delete(customer.id)
+        
+        
+while True:
+    taxtype = taxtype_api.get_all_tax_types_using_get()
+    if not taxtype:
+        break
+    for taxtype in taxtype:
+        print "Deleting Tax_type: %s" % taxtype.label
+        taxtype_api.delete_tax_type_using_delete(taxtype.id)
+        
+

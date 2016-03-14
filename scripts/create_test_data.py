@@ -5,6 +5,9 @@ import swagger_client
 import random
 from random import randint
 
+
+
+
 api = swagger_client.ApiClient("http://localhost:3000/v2/api-docs")
 mill_api = swagger_client.MillresourceApi()
 quality_api = swagger_client.QualityresourceApi()
@@ -13,6 +16,8 @@ customer_api = swagger_client.CustomerresourceApi()
 pricelist_api = swagger_client.PricelistresourceApi()
 customer_group_api = swagger_client.CustomergroupresourceApi()
 price_api = swagger_client.PriceresourceApi()
+taxtype_api = swagger_client.TaxtyperesourceApi()
+tax_api = swagger_client.TaxresourceApi()
 
 size = 3
 fruit = ('apple', 'banana', 'cherry', 'date', 'elderberry',
@@ -30,8 +35,11 @@ number = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 day = ("01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
        "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
        "21", "22", "23", "24", "25", "26", "27", "28")
-month = ("01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
-       "11", "12")
+month_start= ("01", "02", "03", "04", "05", "06")
+month_end = ("07", "08", "09", "10", "11", "12")
+tax_type = ("BED", "CESS", "VAT", "C.S.T", "Insurance")
+op = ("*", "+", "/", "-")
+
 
 def random_name():
     name ='-'.join([random.choice(animal),
@@ -45,13 +53,30 @@ def get_code(name):
     for name in names:
         code+=name[:1]
     return code
+    
+
 
 def create_price_list():
     pl = swagger_client.PriceList()
-    pl.wef_date_from = '-'.join(['2016',random.choice(month),random.choice(day)])
-    pl.wef_date_to = '-'.join(['2016',random.choice(month),random.choice(day)])
+    pl.wef_date_from = '-'.join(['2016',random.choice(month_start),random.choice(day)])
+    pl.wef_date_to = '-'.join(['2016',random.choice(month_end),random.choice(day)])
     pl = pricelist_api.create_price_list_using_post(pl)
     return pl
+    
+def create_tax_type(plist):
+    tt = swagger_client.TaxType()
+    tt.label = random.choice(tax_type)
+    print "Creating taxtype: %s" % tt.label
+    tt = taxtype_api.create_tax_type_using_post(tt)
+    for i in range(0, size):
+        tax = swagger_client.Tax()
+        tax.rate = random.choice(number)
+        tax.type = tt
+        tax.price_list = plist
+        print "Creating tax: %s for taxtype: %s" % (tax.type, tt.label)
+        tax = tax_api.create_tax_using_post(tax)
+    return tt
+
 
 def create_customer():
     cust = swagger_client.Customer()
@@ -84,6 +109,7 @@ def create_price(mill, plist, quality, sgs):
 
 all_sgs = []
 
+
 def create_mill():
     mill = swagger_client.Mill()
     mill.name = random_name()
@@ -99,13 +125,14 @@ def create_mill():
     for i in range(0, size):
         sgs = swagger_client.SimpleGsmShade()
         sgs.shade = random.choice(shade)
-        sgs.min_gsm = randint(0, 500)
-        sgs.max_gsm = randint(0, 500)
+        sgs.min_gsm = randint(30, 50)
+        sgs.max_gsm = randint(51, 500)
         sgs.mill = mill
         print "Creating SimpleGsmShade: %s(%s-%s) for Mill: %s" % (sgs.shade, sgs.min_gsm, sgs.max_gsm, mill.name)
-        all_sgs.append(sgs_api.create_simple_gsm_shade_using_post(sgs))
-    return mill_api.get_mill_using_get(mill.id)
-
+        sgs_api.create_simple_gsm_shade_using_post(sgs)
+    return mill
+    
+    
 mills = []
 for i in range(0, size):
     mills.append(create_mill())
@@ -127,4 +154,13 @@ for mill in mills:
             for sgs in all_sgs:
                 if(sgs.mill.id == mill.id):
                     create_price(mill, plist, quality, sgs)
+                    
+taxtype = []
+for i in range(0, size):
+        for plist in plists:
+            taxtype.append(create_tax_type(plist))
+
+            
+
+                    
 
