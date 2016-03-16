@@ -66,7 +66,7 @@ def create_taxes(plist):
         taxes.rate = random.choice(number)
         taxes.type = tt
         taxes.price_list = plist
-        print "Creating taxes: %s for taxtype: %s" % (taxes.type, tt.label)
+        print "Creating tax of type: %s for plist: %s" % (tt.label, plist.id)
         taxes = tax_api.create_tax_using_post(taxes)
     return tt
 
@@ -121,8 +121,8 @@ def create_mill():
         sgs.mill = mill
         print "Creating SimpleGsmShade: %s(%s-%s) for Mill: %s" % (sgs.shade, sgs.min_gsm, sgs.max_gsm, mill.name)
         all_sgs.append(sgs_api.create_simple_gsm_shade_using_post(sgs))
-    return mill_api.get_mill_using_get(mill.id)  
-    
+    return mill_api.get_mill_using_get(mill.id)
+
 mills = []
 for i in range(0, size):
     mills.append(create_mill())
@@ -149,8 +149,4 @@ taxtypes = []
 for i in range(0, size):
         for plist in plists:	
             taxtypes.append(create_taxes(plist))
-
-            
-
-                    
 
