@@ -48,12 +48,12 @@ while True:
         customer_group_api.delete_customer_group_using_delete(group.id)
         
 while True:
-    tax = tax_api.get_all_taxs_using_get()
-    if not tax:
+    taxes = tax_api.get_all_taxs_using_get()
+    if not taxes:
         break
-    for tax in tax:
-        print "Deleting Tax: %s" % tax.type
-        tax_api.delete_tax_using_delete(tax.id)
+    for taxes in taxes:
+        print "Deleting Taxes: %s" % taxes.type
+        tax_api.delete_tax_using_delete(taxes.id)
 
 while True:
     plists = price_list_api.get_all_price_lists_using_get()
@@ -81,11 +81,11 @@ while True:
         
         
 while True:
-    taxtype = taxtype_api.get_all_tax_types_using_get()
-    if not taxtype:
+    taxtypes = taxtype_api.get_all_tax_types_using_get()
+    if not taxtypes:
         break
-    for taxtype in taxtype:
-        print "Deleting Tax_type: %s" % taxtype.label
-        taxtype_api.delete_tax_type_using_delete(taxtype.id)
+    for taxtypes in taxtypes:
+        print "Deleting Tax_types: %s" % taxtypes.label
+        taxtype_api.delete_tax_type_using_delete(taxtypes.id)
         
 

@@ -5,9 +5,6 @@ import swagger_client
 import random
 from random import randint
 
-
-
-
 api = swagger_client.ApiClient("http://localhost:3000/v2/api-docs")
 mill_api = swagger_client.MillresourceApi()
 quality_api = swagger_client.QualityresourceApi()
@@ -38,8 +35,6 @@ day = ("01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
 month_start= ("01", "02", "03", "04", "05", "06")
 month_end = ("07", "08", "09", "10", "11", "12")
 tax_type = ("BED", "CESS", "VAT", "C.S.T", "Insurance")
-op = ("*", "+", "/", "-")
-
 
 def random_name():
     name ='-'.join([random.choice(animal),
@@ -53,8 +48,6 @@ def get_code(name):
     for name in names:
         code+=name[:1]
     return code
-    
-
 
 def create_price_list():
     pl = swagger_client.PriceList()
@@ -63,20 +56,19 @@ def create_price_list():
     pl = pricelist_api.create_price_list_using_post(pl)
     return pl
     
-def create_tax_type(plist):
+def create_taxes(plist):
     tt = swagger_client.TaxType()
     tt.label = random.choice(tax_type)
     print "Creating taxtype: %s" % tt.label
     tt = taxtype_api.create_tax_type_using_post(tt)
     for i in range(0, size):
-        tax = swagger_client.Tax()
-        tax.rate = random.choice(number)
-        tax.type = tt
-        tax.price_list = plist
-        print "Creating tax: %s for taxtype: %s" % (tax.type, tt.label)
-        tax = tax_api.create_tax_using_post(tax)
+        taxes = swagger_client.Tax()
+        taxes.rate = random.choice(number)
+        taxes.type = tt
+        taxes.price_list = plist
+        print "Creating taxes: %s for taxtype: %s" % (taxes.type, tt.label)
+        taxes = tax_api.create_tax_using_post(taxes)
     return tt
-
 
 def create_customer():
     cust = swagger_client.Customer()
@@ -109,7 +101,6 @@ def create_price(mill, plist, quality, sgs):
 
 all_sgs = []
 
-
 def create_mill():
     mill = swagger_client.Mill()
     mill.name = random_name()
@@ -129,9 +120,8 @@ def create_mill():
         sgs.max_gsm = randint(51, 500)
         sgs.mill = mill
         print "Creating SimpleGsmShade: %s(%s-%s) for Mill: %s" % (sgs.shade, sgs.min_gsm, sgs.max_gsm, mill.name)
-        sgs_api.create_simple_gsm_shade_using_post(sgs)
-    return mill
-    
+        all_sgs.append(sgs_api.create_simple_gsm_shade_using_post(sgs))
+    return mill_api.get_mill_using_get(mill.id)  
     
 mills = []
 for i in range(0, size):
@@ -155,10 +145,10 @@ for mill in mills:
                 if(sgs.mill.id == mill.id):
                     create_price(mill, plist, quality, sgs)
                     
-taxtype = []
+taxtypes = []
 for i in range(0, size):
-        for plist in plists:
-            taxtype.append(create_tax_type(plist))
+        for plist in plists:	
+            taxtypes.append(create_taxes(plist))
 
             
 
