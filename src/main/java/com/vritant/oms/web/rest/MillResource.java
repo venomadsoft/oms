@@ -113,7 +113,7 @@ public class MillResource {
 
     private Mill resolveMill(Mill mill) {
         if(mill != null) {
-        mill.setQualitiess(qualityRepository.findByMillId(mill.getId()));
+            mill.setQualitiess(qualityRepository.findByMillId(mill.getId()));
         }
         return mill;
     }

@@ -30,6 +30,7 @@ public class Quality implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "mill_id")
+    @JsonIgnore
     private Mill mill;
 
     @OneToMany(mappedBy = "quality")

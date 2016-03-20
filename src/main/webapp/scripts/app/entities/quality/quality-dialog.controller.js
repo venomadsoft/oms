@@ -5,7 +5,19 @@ angular.module('omsApp').controller('QualityDialogController',
         function($scope, $stateParams, $uibModalInstance, entity, Quality, Mill, Price) {
 
         $scope.quality = entity;
-        $scope.mills = Mill.query();
+        $scope.findMill = function() {
+            Mill.query(function(result) {
+                $scope.mills = result;
+                var mill;
+                for(mill in $scope.mills) {
+                    if($scope.mills[mill].id == $stateParams['id']) {
+                        $scope.quality.mill = $scope.mills[mill];
+                    }
+                }
+            });
+        }
+        $scope.findMill();
+
         $scope.prices = Price.query();
         $scope.load = function(id) {
             Quality.get({id : id}, function(result) {
