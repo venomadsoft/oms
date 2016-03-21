@@ -21,7 +21,7 @@ angular.module('omsApp')
             })
             .state('quality.detail', {
                 parent: 'entity',
-                url: '/quality/{qualityId}',
+                url: '/quality/{qualityId}/mill/{millId}/code/{millCode}',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'Quality'
@@ -66,7 +66,7 @@ angular.module('omsApp')
             })
             .state('quality.edit', {
                 parent: 'mill.detail',
-                url: '/{qualityId}/edit',
+                url: '/quality/{qualityId}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -89,7 +89,7 @@ angular.module('omsApp')
             })
             .state('quality.delete', {
                 parent: 'mill.detail',
-                url: '/{qualityId}/delete',
+                url: '/quality/{qualityId}/delete',
                 data: {
                     authorities: ['ROLE_USER'],
                 },

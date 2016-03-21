@@ -1,14 +1,16 @@
 package com.vritant.oms.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
 import java.io.Serializable;
 import java.util.Objects;
-
 import java.util.Set;
 import java.util.HashSet;
 
@@ -30,6 +32,7 @@ public class Quality implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "mill_id")
+    @JsonIgnore
     private Mill mill;
 
     @OneToMany(mappedBy = "quality")
@@ -53,10 +56,12 @@ public class Quality implements Serializable {
         this.label = label;
     }
 
+    @JsonIgnore
     public Mill getMill() {
         return mill;
     }
 
+    @JsonProperty
     public void setMill(Mill mill) {
         this.mill = mill;
     }

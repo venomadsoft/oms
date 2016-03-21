@@ -45,7 +45,7 @@
             </tr>
             <tr ng-repeat="quality in mill.qualitiess">
                 <td>
-                    <a class="form-control-static" ui-sref="quality.detail({qualityId:quality.id})">{{quality.label}}</a>
+                    <a class="form-control-static" ui-sref="quality.detail({qualityId:quality.id, millId:mill.id, millCode:mill.code})">{{quality.label}}</a>
                     <button type="submit"
                         ui-sref="quality.edit({qualityId:quality.id})"
                         class="btn btn-primary btn-xs">
