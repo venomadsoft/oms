@@ -1,10 +1,22 @@
-language: node_js
-node_js:
-  - "0.12"
-sudo: false
+language: java
+jdk:
+  - oraclejdk8
+env:
+  - NODE_VERSION=0.12
+sudo: required
 before_install: npm install -g gulp
-install: npm install
-before_script: gulp build
+install: 
+  - nvm install $NODE_VERSION
+  - npm install
+before_script:
+  - npm install -g grunt-cli
+  - npm install -g bower
+  - bower install -f
+  - gulp build
+script:
+  - nvm use $NODE_VERSION
+  - mvn test
+  - npm test
 notifications:
   webhooks:
     on_success: change  # options: [always|never|change] default: always
