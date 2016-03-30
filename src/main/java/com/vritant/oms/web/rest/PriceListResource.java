@@ -3,6 +3,7 @@ package com.vritant.oms.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.vritant.oms.domain.PriceList;
 import com.vritant.oms.repository.PriceListRepository;
+import com.vritant.oms.repository.PriceRepository;
 import com.vritant.oms.web.rest.util.HeaderUtil;
 import com.vritant.oms.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -33,6 +34,9 @@ public class PriceListResource {
         
     @Inject
     private PriceListRepository priceListRepository;
+    
+    @Inject
+    private PriceRepository priceRepository;
     
     /**
      * POST  /priceLists -> Create a new priceList.
@@ -95,6 +99,9 @@ public class PriceListResource {
     public ResponseEntity<PriceList> getPriceList(@PathVariable Long id) {
         log.debug("REST request to get PriceList : {}", id);
         PriceList priceList = priceListRepository.findOne(id);
+        if(priceList != null) {
+            priceList.setPricess(priceRepository.findByPriceListId(id));
+        }
         return Optional.ofNullable(priceList)
             .map(result -> new ResponseEntity<>(
                 result,

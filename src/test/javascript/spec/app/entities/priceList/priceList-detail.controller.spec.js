@@ -6,11 +6,12 @@ describe('Controller Tests', function() {
         var $scope, $rootScope;
         var MockEntity, MockPriceList, MockPrice, MockTax, MockCustomerGroup, MockDerivedGsmShade;
         var createController;
+        var entity = new Object();
 
         beforeEach(inject(function($injector) {
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
-            MockEntity = jasmine.createSpy('MockEntity');
+            entity.$promise = $injector.get('$q').defer().promise;
             MockPriceList = jasmine.createSpy('MockPriceList');
             MockPrice = jasmine.createSpy('MockPrice');
             MockTax = jasmine.createSpy('MockTax');
@@ -21,7 +22,7 @@ describe('Controller Tests', function() {
             var locals = {
                 '$scope': $scope,
                 '$rootScope': $rootScope,
-                'entity': MockEntity ,
+                'entity': entity ,
                 'PriceList': MockPriceList,
                 'Price': MockPrice,
                 'Tax': MockTax,

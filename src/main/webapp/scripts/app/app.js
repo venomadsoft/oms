@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('omsApp', ['LocalStorageModule', 
-    'ngResource', 'ngCookies', 'ngAria', 'ngCacheBuster', 'ngFileUpload',
+    'ngResource', 'ngCookies', 'ngAria', 'ngCacheBuster', 'ngFileUpload', 'ngTable',
     // jhipster-needle-angularjs-add-module JHipster will add new module here
     'ui.bootstrap', 'ui.router',  'infinite-scroll', 'angular-loading-bar'])
 

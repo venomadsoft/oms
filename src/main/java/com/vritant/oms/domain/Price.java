@@ -3,8 +3,11 @@ package com.vritant.oms.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,6 +43,7 @@ public class Price implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "price_list_id")
+    @JsonIgnore
     private PriceList priceList;
 
     public Long getId() {
