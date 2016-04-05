@@ -59,6 +59,32 @@
                 </td>
             </tr>
             <tr>
+                    <td rowspan="{{mill.simpleGsmShadess.length+1}}">
+                          <span>SimpleGsmShade</span>
+                    <button class="btn btn-primary btn-xs" ui-sref="simpleGsmShade.new()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </td>
+            </tr>
+            <tr ng-repeat="simpleGsmShade in mill.simpleGsmShadess">
+                <td>
+                    <a class="form-control-static" ui-sref="simpleGsmShade.detail({simpleGsmShadeId:simpleGsmShade.id, millId:mill.id, millCode:mill.code})">{{simpleGsmShade.minGsm}}</a>
+                    <a class="form-control-static" ui-sref="simpleGsmShade.detail({simpleGsmShadeId:simpleGsmShade.id, millId:mill.id, millCode:mill.code})">{{simpleGsmShade.maxGsm}}</a>
+                    <a class="form-control-static" ui-sref="simpleGsmShade.detail({simpleGsmShadeId:simpleGsmShade.id, millId:mill.id, millCode:mill.code})">{{simpleGsmShade.shade}}</a>
+                    <button type="submit"
+                        ui-sref="simpleGsmShade.edit({simpleGsmShadeId:simpleGsmShade.id})"
+                        class="btn btn-primary btn-xs">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>	
+                    <button type="submit"
+                        ui-sref="simpleGsmShade.delete({simpleGsmShadeId:simpleGsmShade.id})"
+                        class="btn btn-danger btn-xs">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+            
                 <td>
                     <span>notes</span>
                 </td>

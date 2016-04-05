@@ -21,7 +21,7 @@ angular.module('omsApp')
             })
             .state('simpleGsmShade.detail', {
                 parent: 'entity',
-                url: '/simpleGsmShade/{id}',
+                url: '/simpleGsmShade/{simpleGsmShadeId}/mill/{millId}/code/{millCode}',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'SimpleGsmShade'
@@ -34,13 +34,13 @@ angular.module('omsApp')
                 },
                 resolve: {
                     entity: ['$stateParams', 'SimpleGsmShade', function($stateParams, SimpleGsmShade) {
-                        return SimpleGsmShade.get({id : $stateParams.id});
+                        return SimpleGsmShade.get({id : $stateParams.simpleGsmShadeId});
                     }]
                 }
             })
             .state('simpleGsmShade.new', {
-                parent: 'simpleGsmShade',
-                url: '/new',
+                parent: 'mill.detail',
+                url: '/new/',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -60,15 +60,15 @@ angular.module('omsApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('simpleGsmShade', null, { reload: true });
+                    	$state.go('^', {id: $stateParams.id}, {reload: true});
                     }, function() {
-                        $state.go('simpleGsmShade');
+                    	$state.go('^', {id: $stateParams.id}, {reload: true});
                     })
                 }]
             })
             .state('simpleGsmShade.edit', {
-                parent: 'simpleGsmShade',
-                url: '/{id}/edit',
+            	parent: 'mill.detail',
+            	url: '/simpleGsmShade/{simpleGsmShadeId}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -79,19 +79,19 @@ angular.module('omsApp')
                         size: 'lg',
                         resolve: {
                             entity: ['SimpleGsmShade', function(SimpleGsmShade) {
-                                return SimpleGsmShade.get({id : $stateParams.id});
+                                return SimpleGsmShade.get({id : $stateParams.simpleGsmShadeId});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('simpleGsmShade', null, { reload: true });
+                    	$state.go('^', {id: $stateParams.id},{reload: true});
                     }, function() {
-                        $state.go('^');
+                    	$state.go('^', {id: $stateParams.id},{reload: true});
                     })
                 }]
             })
             .state('simpleGsmShade.delete', {
-                parent: 'simpleGsmShade',
-                url: '/{id}/delete',
+                parent: 'mill.detail',
+                url: '/simpleGsmShade/{simpleGsmShadeId}/delete',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -102,13 +102,13 @@ angular.module('omsApp')
                         size: 'md',
                         resolve: {
                             entity: ['SimpleGsmShade', function(SimpleGsmShade) {
-                                return SimpleGsmShade.get({id : $stateParams.id});
+                                return SimpleGsmShade.get({id : $stateParams.simpleGsmShadeId}});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('simpleGsmShade', null, { reload: true });
+                    	$state.go('^', {id: $stateParams.id},{reload: true});
                     }, function() {
-                        $state.go('^');
+                    	$state.go('^', {id: $stateParams.id},{reload: true});
                     })
                 }]
             });
