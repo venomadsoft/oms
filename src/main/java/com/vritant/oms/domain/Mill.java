@@ -50,11 +50,10 @@ public class Mill implements Serializable {
     private List<Quality> qualitiess = new ArrayList<>();
 
     @OneToMany(mappedBy = "mill")
-    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<SimpleGsmShade> simpleGsmShadess = new HashSet<>();
+    private List<SimpleGsmShade> simpleGsmShadess = new ArrayList<>();
 
-    @OneToMany(mappedBy = "mill")
+	@OneToMany(mappedBy = "mill")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<CustomerGroup> groupss = new HashSet<>();
@@ -119,16 +118,16 @@ public class Mill implements Serializable {
     public void setQualitiess(List<Quality> qualitys) {
         this.qualitiess = qualitys;
     }
+    
+ 	public List<SimpleGsmShade> getSimpleGsmShadess() {
+		return simpleGsmShadess;
+	}
 
-    public Set<SimpleGsmShade> getSimpleGsmShadess() {
-        return simpleGsmShadess;
-    }
+	public void setSimpleGsmShadess(List<SimpleGsmShade> simpleGsmShades) {
+		this.simpleGsmShadess = simpleGsmShades;
+	}
 
-    public void setSimpleGsmShadess(Set<SimpleGsmShade> simpleGsmShades) {
-        this.simpleGsmShadess = simpleGsmShades;
-    }
-
-    public Set<CustomerGroup> getGroupss() {
+	public Set<CustomerGroup> getGroupss() {
         return groupss;
     }
 

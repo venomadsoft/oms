@@ -2,8 +2,10 @@ package com.vritant.oms.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.vritant.oms.domain.Mill;
+import com.vritant.oms.domain.Quality;
 import com.vritant.oms.repository.MillRepository;
 import com.vritant.oms.repository.QualityRepository;
+import com.vritant.oms.repository.SimpleGsmShadeRepository;
 import com.vritant.oms.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +19,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
+import java.util.List;	
 import java.util.Optional;
 
 /**
@@ -33,6 +35,8 @@ public class MillResource {
     private MillRepository millRepository;
     @Inject
     private QualityRepository qualityRepository;
+    @Inject
+    private SimpleGsmShadeRepository SimpleGsmShadeRepository;
 
     /**
      * POST  /mills -> Create a new mill.
@@ -41,7 +45,7 @@ public class MillResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Mill> createMill(@Valid @RequestBody Mill mill) throws URISyntaxException {
+    public ResponseEntity<	Mill> createMill(@Valid @RequestBody Mill mill) throws URISyntaxException {
         log.debug("REST request to save Mill : {}", mill);
         if (mill.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("mill", "idexists", "A new mill cannot already have an ID")).body(null);
@@ -92,7 +96,7 @@ public class MillResource {
     public ResponseEntity<Mill> getMill(@PathVariable Long id) {
         log.debug("REST request to get Mill : {}", id);
         return Optional.ofNullable(resolveMill(millRepository.findOne(id)))
-            .map(mill -> new ResponseEntity<>(
+            .map(mill -> new ResponseEntity<>( 
                 mill,
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -113,7 +117,9 @@ public class MillResource {
 
     private Mill resolveMill(Mill mill) {
         if(mill != null) {
-        mill.setQualitiess(qualityRepository.findByMillId(mill.getId()));
+            mill.setQualitiess(qualityRepository.findByMillId(mill.getId()));
+            mill.setSimpleGsmShadess(SimpleGsmShadeRepository.findByMillId(mill.getId()));
+            log.debug("In resolve mill : {}", mill.getId());
         }
         return mill;
     }

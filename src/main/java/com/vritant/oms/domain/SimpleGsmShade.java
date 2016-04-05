@@ -1,6 +1,7 @@
 package com.vritant.oms.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -37,6 +38,7 @@ public class SimpleGsmShade implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "mill_id")
+    @JsonIgnore
     private Mill mill;
 
     @OneToMany(mappedBy = "simpleGsmShade")
@@ -75,11 +77,13 @@ public class SimpleGsmShade implements Serializable {
     public void setShade(String shade) {
         this.shade = shade;
     }
-
+    
+    @JsonIgnore	
     public Mill getMill() {
         return mill;
     }
-
+    
+    @JsonProperty
     public void setMill(Mill mill) {
         this.mill = mill;
     }

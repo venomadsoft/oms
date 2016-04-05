@@ -80,6 +80,18 @@ public class SimpleGsmShadeResource {
             }
 
     /**
+     * GET  mill/:id/SimpleGsmShades -> get all the simpleGsmShades if the Mill "id".
+     */
+    @RequestMapping(value = "mill/{id}/simpleGsmShades",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<SimpleGsmShade> getAllMillSimpleGsmShades(@PathVariable Long id) {
+        log.debug("REST request to get all SimpleGsmShades of Mill : {}", id);
+        return simpleGsmShadeRepository.findByMillId(id);
+    }
+    
+    /**
      * GET  /simpleGsmShades/:id -> get the "id" simpleGsmShade.
      */
     @RequestMapping(value = "/simpleGsmShades/{id}",

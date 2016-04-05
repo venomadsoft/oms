@@ -3,6 +3,11 @@ package com.vritant.oms.web.rest;
 import com.vritant.oms.Application;
 import com.vritant.oms.domain.Mill;
 import com.vritant.oms.repository.MillRepository;
+import com.vritant.oms.domain.Quality;
+import com.vritant.oms.domain.SimpleGsmShade;
+import com.vritant.oms.repository.MillRepository;
+import com.vritant.oms.repository.QualityRepository;
+import com.vritant.oms.repository.SimpleGsmShadeRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,6 +55,12 @@ public class MillResourceIntTest {
     private MillRepository millRepository;
 
     @Inject
+    private QualityRepository qualityRepository;
+    
+    @Inject
+    private SimpleGsmShadeRepository simpleGsmShadeRepository;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -64,6 +75,9 @@ public class MillResourceIntTest {
         MockitoAnnotations.initMocks(this);
         MillResource millResource = new MillResource();
         ReflectionTestUtils.setField(millResource, "millRepository", millRepository);
+        ReflectionTestUtils.setField(millResource, "qualityRepository", qualityRepository);
+        ReflectionTestUtils.setField(millResource, "simpleGsmShadeRepository",simpleGsmShadeRepository);
+
         this.restMillMockMvc = MockMvcBuilders.standaloneSetup(millResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -160,6 +174,35 @@ public class MillResourceIntTest {
             .andExpect(jsonPath("$.id").value(mill.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+    }
+
+    @Test
+    @Transactional
+    public void resolveMill() throws Exception {
+        // Initialize the database
+        millRepository.saveAndFlush(mill);
+
+        Quality quality = new Quality();
+        quality.setLabel("testQuality");
+        quality.setMill(mill);
+        qualityRepository.saveAndFlush(quality);
+        
+        SimpleGsmShade simpleGsmShade = new SimpleGsmShade();
+        simpleGsmShade.setShade("TestSimpleGsmShade");
+        simpleGsmShade.setMill(mill);
+        simpleGsmShadeRepository.saveAndFlush(simpleGsmShade);
+
+        // Get the mill
+        restMillMockMvc.perform(get("/api/mills/{id}", mill.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.id").value(mill.getId().intValue()))
+            .andExpect(jsonPath("$.qualitiess[0].id").value(quality.getId().intValue()))
+            .andExpect(jsonPath("$.qualitiess[0].label").value(quality.getLabel()))
+            .andExpect(jsonPath("$.simpleGsmShadess[0].id").value(simpleGsmShade.getId().intValue()))
+            .andExpect(jsonPath("$.simpleGsmShadess[0].minGsm").value(simpleGsmShade.getMinGsm()))
+            .andExpect(jsonPath("$.simpleGsmShadess[0].maxGsm").value(simpleGsmShade.getMaxGsm()))
+            .andExpect(jsonPath("$.simpleGsmShadess[0].shade").value(simpleGsmShade.getShade()));        
     }
 
     @Test

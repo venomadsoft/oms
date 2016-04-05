@@ -142,15 +142,10 @@ for mill in mills:
         create_customer_group(mill, plist, customers[index:index+3]);
         for quality in mill.qualitiess:
             for sgs in all_sgs:
-                if(sgs.mill.id == mill.id):
+                if(mill.id != None):
                     create_price(mill, plist, quality, sgs)
-                    
+                    	
 taxtypes = []
 for i in range(0, size):
         for plist in plists:	
             taxtypes.append(create_taxes(plist))
-
-            
-
-                    
-
