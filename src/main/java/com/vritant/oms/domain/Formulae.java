@@ -1,14 +1,19 @@
 package com.vritant.oms.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * A Formulae.
@@ -24,7 +29,6 @@ public class Formulae implements Serializable {
 
     @OneToMany(mappedBy = "parent")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Formula> childrens = new HashSet<>();
 
     public Long getId() {
@@ -37,6 +41,21 @@ public class Formulae implements Serializable {
 
     public Set<Formula> getChildrens() {
         return childrens;
+    }
+
+    class FormulaComparator implements Comparator<Formula>{
+
+        @Override
+        public int compare(Formula arg0, Formula arg1) {
+            return (int)(arg0.getId() - arg1.getId());
+        }
+    }
+
+    @JsonIgnore
+    public Set<Formula> getSortedChildrens() {
+        SortedSet<Formula> result = new TreeSet<Formula>(new FormulaComparator());
+        result.addAll(childrens);
+        return result;
     }
 
     public void setChildrens(Set<Formula> formulas) {

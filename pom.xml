@@ -37,6 +37,7 @@
         <assertj-core.version>3.1.0</assertj-core.version>
         <awaitility.version>1.4.0</awaitility.version>
         <commons-io.version>2.4</commons-io.version>
+        <commons-collection.version>3.2</commons-collection.version>
         <commons-lang.version>2.6</commons-lang.version>
         <cucumber.version>1.2.4</cucumber.version>
         <gatling.version>2.1.7</gatling.version>
@@ -216,6 +217,11 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collection.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
