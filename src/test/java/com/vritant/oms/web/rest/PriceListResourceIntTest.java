@@ -1,11 +1,17 @@
 package com.vritant.oms.web.rest;
 
 import com.vritant.oms.Application;
+import com.vritant.oms.domain.DerivedGsmShade;
+import com.vritant.oms.domain.Formula;
+import com.vritant.oms.domain.Formulae;
 import com.vritant.oms.domain.Mill;
 import com.vritant.oms.domain.Price;
 import com.vritant.oms.domain.PriceList;
 import com.vritant.oms.domain.Quality;
 import com.vritant.oms.domain.SimpleGsmShade;
+import com.vritant.oms.repository.DerivedGsmShadeRepository;
+import com.vritant.oms.repository.FormulaRepository;
+import com.vritant.oms.repository.FormulaeRepository;
 import com.vritant.oms.repository.MillRepository;
 import com.vritant.oms.repository.PriceListRepository;
 import com.vritant.oms.repository.PriceRepository;
@@ -37,7 +43,9 @@ import javax.inject.Inject;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -81,7 +89,16 @@ public class PriceListResourceIntTest {
     private SimpleGsmShadeRepository sgsRepository;
 
     @Inject
+    private DerivedGsmShadeRepository dgsRepository;
+
+    @Inject
     private DerivedGsmShadeService dgsService;
+
+    @Inject
+    private FormulaeRepository formulaeRepository;
+
+    @Inject
+    private FormulaRepository formulaRepository;
 
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -96,6 +113,9 @@ public class PriceListResourceIntTest {
     private Mill mill;
     private Quality q;
     private SimpleGsmShade sgs;
+    private DerivedGsmShade dgs;
+    private Formulae formulae;
+    private Formula formula;
     private Float value = 2.3f;
 
     @PostConstruct
@@ -137,6 +157,23 @@ public class PriceListResourceIntTest {
         price.setQuality(q);
         price.setSimpleGsmShade(sgs);
         price.setPriceList(priceList);
+
+        formulae = new Formulae();
+        formula = new Formula();
+        formula.setOperand(100f);
+        formula.setOperator("+");
+        formula.setParent(formulae);
+        Set<Formula> children = new HashSet<>();
+        children.add(formula);
+        formulae.setChildrens(children);
+        dgs = new DerivedGsmShade();
+        dgs.setMill(mill);
+        dgs.setPriceList(priceList);
+        dgs.setMinGsm(321);
+        dgs.setMaxGsm(42);
+        dgs.setShade("notyellow");
+        dgs.setSimpleGsmShade(sgs);
+        dgs.setFormulae(formulae);
     }
 
     @Test
@@ -247,6 +284,30 @@ public class PriceListResourceIntTest {
             .andExpect(jsonPath("$.pricess[0].mill.id").value(mill.getId().intValue()))
             .andExpect(jsonPath("$.pricess[0].quality.id").value(q.getId().intValue()))
             .andExpect(jsonPath("$.pricess[0].simpleGsmShade.id").value(sgs.getId().intValue()));
+    }
+
+    @Test
+    @Transactional
+    public void getDerivedPrices() throws Exception {
+        // Initialize the database
+        priceListRepository.save(priceList);
+        millRepository.save(mill);
+        qualityRepository.save(q);
+        sgsRepository.save(sgs);
+        priceRepository.saveAndFlush(price);
+        formulaeRepository.save(formulae);
+        formulaRepository.save(formula);
+        dgsRepository.save(dgs);
+
+        // Get the priceList
+        restPriceListMockMvc.perform(get("/api/priceLists/{id}", priceList.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.id").value(priceList.getId().intValue()))
+            .andExpect(jsonPath("$.pricess[1].value").value(102.3d))
+            .andExpect(jsonPath("$.pricess[1].mill.id").value(mill.getId().intValue()))
+            .andExpect(jsonPath("$.pricess[1].quality.id").value(q.getId().intValue()))
+            .andExpect(jsonPath("$.pricess[1].derivedGsmShade.id").value(dgs.getId().intValue()));
     }
 
     @Test

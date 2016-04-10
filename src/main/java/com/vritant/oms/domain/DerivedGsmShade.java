@@ -3,6 +3,8 @@ package com.vritant.oms.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -46,6 +48,7 @@ public class DerivedGsmShade implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "price_list_id")
+    @JsonIgnore
     private PriceList priceList;
 
     public Long getId() {
