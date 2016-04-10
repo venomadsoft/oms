@@ -1,13 +1,23 @@
 package com.vritant.oms.web.rest;
 
 import com.vritant.oms.Application;
+import com.vritant.oms.domain.Mill;
+import com.vritant.oms.domain.Price;
 import com.vritant.oms.domain.PriceList;
+import com.vritant.oms.domain.Quality;
+import com.vritant.oms.domain.SimpleGsmShade;
+import com.vritant.oms.repository.MillRepository;
 import com.vritant.oms.repository.PriceListRepository;
+import com.vritant.oms.repository.PriceRepository;
+import com.vritant.oms.repository.QualityRepository;
+import com.vritant.oms.repository.SimpleGsmShadeRepository;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import static org.hamcrest.Matchers.hasItem;
+
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -23,6 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
@@ -57,6 +68,18 @@ public class PriceListResourceIntTest {
     private PriceListRepository priceListRepository;
 
     @Inject
+    private PriceRepository priceRepository;
+
+    @Inject
+    private MillRepository millRepository;
+
+    @Inject
+    private QualityRepository qualityRepository;
+
+    @Inject
+    private SimpleGsmShadeRepository sgsRepository;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -65,12 +88,18 @@ public class PriceListResourceIntTest {
     private MockMvc restPriceListMockMvc;
 
     private PriceList priceList;
+    private Price price;
+    private Mill mill;
+    private Quality q;
+    private SimpleGsmShade sgs;
+    private Float value = 2.3f;
 
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
         PriceListResource priceListResource = new PriceListResource();
         ReflectionTestUtils.setField(priceListResource, "priceListRepository", priceListRepository);
+        ReflectionTestUtils.setField(priceListResource, "priceRepository", priceRepository);
         this.restPriceListMockMvc = MockMvcBuilders.standaloneSetup(priceListResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -82,6 +111,27 @@ public class PriceListResourceIntTest {
         priceList.setWefDateFrom(DEFAULT_WEF_DATE_FROM);
         priceList.setWefDateTo(DEFAULT_WEF_DATE_TO);
         priceList.setActive(DEFAULT_ACTIVE);
+
+        mill = new Mill();
+        mill.setName("mill");
+        mill.setCode("m");
+
+        q = new Quality();
+        q.setLabel("q");
+        q.setMill(mill);
+
+        sgs = new SimpleGsmShade();
+        sgs.setMinGsm(234);
+        sgs.setMaxGsm(432);
+        sgs.setShade("yellow");
+        sgs.setMill(mill);
+
+        price = new Price();
+        price.setValue(value);
+        price.setMill(mill);
+        price.setQuality(q);
+        price.setSimpleGsmShade(sgs);
+        price.setPriceList(priceList);
     }
 
     @Test
@@ -171,6 +221,27 @@ public class PriceListResourceIntTest {
             .andExpect(jsonPath("$.wefDateFrom").value(DEFAULT_WEF_DATE_FROM.toString()))
             .andExpect(jsonPath("$.wefDateTo").value(DEFAULT_WEF_DATE_TO.toString()))
             .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()));
+    }
+
+    @Test
+    @Transactional
+    public void getPriceListPrices() throws Exception {
+        // Initialize the database
+        priceListRepository.save(priceList);
+        millRepository.save(mill);
+        qualityRepository.save(q);
+        sgsRepository.save(sgs);
+        priceRepository.saveAndFlush(price);
+
+        // Get the priceList
+        restPriceListMockMvc.perform(get("/api/priceLists/{id}", priceList.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.id").value(priceList.getId().intValue()))
+            .andExpect(jsonPath("$.pricess[0].value").value(2.3d))
+            .andExpect(jsonPath("$.pricess[0].mill.id").value(mill.getId().intValue()))
+            .andExpect(jsonPath("$.pricess[0].quality.id").value(q.getId().intValue()))
+            .andExpect(jsonPath("$.pricess[0].simpleGsmShade.id").value(sgs.getId().intValue()));
     }
 
     @Test

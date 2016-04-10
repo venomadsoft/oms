@@ -4,6 +4,7 @@ import unittest
 import swagger_client
 import random
 from random import randint
+from sets import Set
 
 api = swagger_client.ApiClient("http://localhost:3000/v2/api-docs")
 mill_api = swagger_client.MillresourceApi()
@@ -28,7 +29,7 @@ animal = ('ant', 'bear', 'cat', 'dog', 'elephant',
         'rat', 'snake', 'tiger', 'vulture', 'wolf', 'yak',
         'zebra')
 shade = ('red', 'yellow', 'green', 'blue', 'white', 'black')
-number = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+number = (1, 2, 3, 4, 5, 6, 7, 8, 9)
 day = ("01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
        "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
        "21", "22", "23", "24", "25", "26", "27", "28")
@@ -48,6 +49,13 @@ def get_code(name):
     for name in names:
         code+=name[:1]
     return code
+
+qualities = [];
+def get_quality_label():
+    if(qualities == []):
+        for i in range(0, 6):
+            qualities.append(random_name());
+    return random.choice(qualities);
 
 def create_price_list():
     pl = swagger_client.PriceList()
@@ -107,12 +115,16 @@ def create_mill():
     print "Creating Mill: %s" % mill.name
     mill.code = get_code(mill.name)
     mill = mill_api.create_mill_using_post(mill)
+    labels = Set()
     for i in range(0, size):
-        quality = swagger_client.Quality()
-        quality.label = random_name()
-        print "Creating Quality: %s for Mill: %s" % (quality.label, mill.name)
-        quality.mill = mill
-        quality_api.create_quality_using_post(quality)
+        label = get_quality_label()
+        if label not in labels:
+            labels.add(label)
+            quality = swagger_client.Quality()
+            quality.label = label
+            print "Creating Quality: %s for Mill: %s" % (quality.label, mill.name)
+            quality.mill = mill
+            quality_api.create_quality_using_post(quality)
     for i in range(0, size):
         sgs = swagger_client.SimpleGsmShade()
         sgs.shade = random.choice(shade)

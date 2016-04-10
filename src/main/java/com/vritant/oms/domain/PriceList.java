@@ -36,7 +36,6 @@ public class PriceList implements Serializable {
     private Boolean active;
     
     @OneToMany(mappedBy = "priceList")
-    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Price> pricess = new HashSet<>();
 
