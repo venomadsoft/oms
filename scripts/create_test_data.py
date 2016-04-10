@@ -10,12 +10,15 @@ api = swagger_client.ApiClient("http://localhost:3000/v2/api-docs")
 mill_api = swagger_client.MillresourceApi()
 quality_api = swagger_client.QualityresourceApi()
 sgs_api = swagger_client.SimplegsmshaderesourceApi()
+dgs_api = swagger_client.DerivedgsmshaderesourceApi()
 customer_api = swagger_client.CustomerresourceApi()
 pricelist_api = swagger_client.PricelistresourceApi()
 customer_group_api = swagger_client.CustomergroupresourceApi()
 price_api = swagger_client.PriceresourceApi()
 taxtype_api = swagger_client.TaxtyperesourceApi()
 tax_api = swagger_client.TaxresourceApi()
+formula_api = swagger_client.FormularesourceApi()
+formulae_api = swagger_client.FormulaeresourceApi()
 
 size = 3
 fruit = ('apple', 'banana', 'cherry', 'date', 'elderberry',
@@ -36,6 +39,7 @@ day = ("01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
 month_start= ("01", "02", "03", "04", "05", "06")
 month_end = ("07", "08", "09", "10", "11", "12")
 tax_type = ("BED", "CESS", "VAT", "C.S.T", "Insurance")
+operator = ("+", "%")
 
 def random_name():
     name ='-'.join([random.choice(animal),
@@ -63,7 +67,7 @@ def create_price_list():
     pl.wef_date_to = '-'.join(['2016',random.choice(month_end),random.choice(day)])
     pl = pricelist_api.create_price_list_using_post(pl)
     return pl
-    
+
 def create_taxes(plist):
     tt = swagger_client.TaxType()
     tt.label = random.choice(tax_type)
@@ -103,9 +107,37 @@ def create_price(mill, plist, quality, sgs):
     price.simple_gsm_shade = sgs
     price.mill = mill
     price.price_list = plist
-    price.value = random.choice(number)
+    price.value = random.uniform(1.5, 20.9)
     print "Creating Price: %s for Mill: %s Quality: %s gsmShade: %s price list: %s" % (price.value, mill.code, quality.id, sgs.shade, plist.id)
     return price_api.create_price_using_post(price)
+
+def create_formula(formulae):
+    formula = swagger_client.Formula()
+    formula.operator = random.choice(operator)
+    formula.operand = random.uniform(.5, 5)
+    formula.parent = formulae
+    print "Creating Formula for Formulae: %s with operator: %s and operand: %s" % (formulae.id, formula.operator, formula.operand)
+    formula_api.create_formula_using_post(formula)
+    return formula
+
+def create_formulae():
+    print "Creating Formulae"
+    formulae = formulae_api.create_formulae_using_post(swagger_client.Formulae())
+    create_formula(formulae)
+    create_formula(formulae)
+    return formulae
+
+def create_derived_group_shade(mill, plist, sgs):
+    dgs = swagger_client.DerivedGsmShade()
+    dgs.shade = random.choice(shade)
+    dgs.min_gsm = randint(30, 50)
+    dgs.max_gsm = randint(51, 500)
+    dgs.mill = mill
+    dgs.simple_gsm_shade = sgs
+    dgs.price_list = plist
+    dgs.formulae = create_formulae()
+    print "Creating DerivedGsmShade: %s(%s-%s) for Mill: %s using Sgs: %s in Pricelist: %s" % (dgs.shade, dgs.min_gsm, dgs.max_gsm, mill.name, sgs.id, plist.id)
+    dgs_api.create_derived_gsm_shade_using_post(dgs)
 
 all_sgs = []
 
@@ -156,7 +188,9 @@ for mill in mills:
             for sgs in all_sgs:
                 if(sgs.mill.id == mill.id):
                     create_price(mill, plist, quality, sgs)
-                    
+                    if random.random() < .15:
+                        create_derived_group_shade(mill, plist, sgs)
+
 taxtypes = []
 for i in range(0, size):
         for plist in plists:	

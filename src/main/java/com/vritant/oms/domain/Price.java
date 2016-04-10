@@ -1,18 +1,24 @@
 package com.vritant.oms.domain;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 /**
  * A Price.
  */
@@ -37,13 +43,16 @@ public class Price implements Serializable {
     @JoinColumn(name = "simple_gsm_shade_id")
     private SimpleGsmShade simpleGsmShade;
 
+    @Transient
+    private DerivedGsmShade derivedGsmShade;
+
     @ManyToOne
     @JoinColumn(name = "mill_id")
     private Mill mill;
 
     @ManyToOne
     @JoinColumn(name = "price_list_id")
-    @JsonIgnore
+    @JsonProperty(access = Access.WRITE_ONLY)
     private PriceList priceList;
 
     public Long getId() {
@@ -76,6 +85,16 @@ public class Price implements Serializable {
 
     public void setSimpleGsmShade(SimpleGsmShade simpleGsmShade) {
         this.simpleGsmShade = simpleGsmShade;
+    }
+
+    @JsonProperty("derivedGsmShade")
+    public DerivedGsmShade getDerivedGsmShade() {
+        return derivedGsmShade;
+    }
+
+    @JsonProperty("derivedGsmShade")
+    public void setDerivedGsmShade(DerivedGsmShade derivedGsmShade) {
+        this.derivedGsmShade = derivedGsmShade;
     }
 
     public Mill getMill() {
@@ -120,5 +139,13 @@ public class Price implements Serializable {
             "id=" + id +
             ", value='" + value + "'" +
             '}';
+    }
+
+    public Price cloneDerivedPrice() {
+        Price clonedPrice = new Price();
+        clonedPrice.setMill(mill);
+        clonedPrice.setQuality(quality);
+        clonedPrice.setPriceList(priceList);
+        return clonedPrice;
     }
 }

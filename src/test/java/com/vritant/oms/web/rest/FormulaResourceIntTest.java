@@ -41,8 +41,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class FormulaResourceIntTest {
 
-    private static final String DEFAULT_OPERATOR = "A";
-    private static final String UPDATED_OPERATOR = "B";
+    private static final String DEFAULT_OPERATOR = "+";
+    private static final String UPDATED_OPERATOR = "%";
 
     private static final Float DEFAULT_OPERAND = 1F;
     private static final Float UPDATED_OPERAND = 2F;

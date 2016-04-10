@@ -9,11 +9,14 @@ mill_api = swagger_client.MillresourceApi()
 quality_api = swagger_client.QualityresourceApi()
 price_api = swagger_client.PriceresourceApi()
 sgs_api = swagger_client.SimplegsmshaderesourceApi()
+dgs_api = swagger_client.DerivedgsmshaderesourceApi()
 customer_api = swagger_client.CustomerresourceApi()
 customer_group_api = swagger_client.CustomergroupresourceApi()
 price_list_api = swagger_client.PricelistresourceApi()
 taxtype_api = swagger_client.TaxtyperesourceApi()
 tax_api = swagger_client.TaxresourceApi()
+formula_api = swagger_client.FormularesourceApi()
+formulae_api = swagger_client.FormulaeresourceApi()
 
 while True:
     prices = price_api.get_all_prices_using_get()
@@ -30,6 +33,14 @@ while True:
     for quality in qualities:
         print "Deleting Quality: %s" % quality.label
         quality_api.delete_quality_using_delete(quality.id)
+
+while True:
+    dgss = dgs_api.get_all_derived_gsm_shades_using_get()
+    if not dgss:
+        break
+    for dgs in dgss:
+        print "Deleting %s(%s-%s)" % (dgs.shade, dgs.min_gsm, dgs.max_gsm)
+        dgs_api.delete_derived_gsm_shade_using_delete(dgs.id)
 
 while True:
     sgss = sgs_api.get_all_simple_gsm_shades_using_get()
@@ -78,7 +89,7 @@ while True:
     for customer in customers:
         print "Deleting Customer: %s" % customer.name
         customer_api.delete_customer_using_delete(customer.id)
-        
+
         
 while True:
     taxtypes = taxtype_api.get_all_tax_types_using_get()
@@ -87,4 +98,20 @@ while True:
     for taxtype in taxtypes:
         print "Deleting Tax Type: %s" % taxtype.label
         taxtype_api.delete_tax_type_using_delete(taxtype.id)
+
+while True:
+    formulas = formula_api.get_all_formulas_using_get()
+    if not formulas:
+        break
+    for formula in formulas:
+        print "Deleting Formula: %s" % formula.id
+        formula_api.delete_formula_using_delete(formula.id)
+
+while True:
+    formulaes = formulae_api.get_all_formulaes_using_get()
+    if not formulaes:
+        break
+    for formulae in formulaes:
+        print "Deleting Formulae: %s" % formulae.id
+        formulae_api.delete_formulae_using_delete(formulae.id)
 

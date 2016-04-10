@@ -11,6 +11,7 @@ import com.vritant.oms.repository.PriceListRepository;
 import com.vritant.oms.repository.PriceRepository;
 import com.vritant.oms.repository.QualityRepository;
 import com.vritant.oms.repository.SimpleGsmShadeRepository;
+import com.vritant.oms.service.DerivedGsmShadeService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -80,6 +81,9 @@ public class PriceListResourceIntTest {
     private SimpleGsmShadeRepository sgsRepository;
 
     @Inject
+    private DerivedGsmShadeService dgsService;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -100,6 +104,7 @@ public class PriceListResourceIntTest {
         PriceListResource priceListResource = new PriceListResource();
         ReflectionTestUtils.setField(priceListResource, "priceListRepository", priceListRepository);
         ReflectionTestUtils.setField(priceListResource, "priceRepository", priceRepository);
+        ReflectionTestUtils.setField(priceListResource, "dgsService", dgsService);
         this.restPriceListMockMvc = MockMvcBuilders.standaloneSetup(priceListResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();

@@ -20,11 +20,16 @@ angular.module('omsApp')
                 if(millPrices[price.mill.id]["gsmShades"] === undefined) {
                     millPrices[price.mill.id]["gsmShades"] = [];
                 }
-                if(millPrices[price.mill.id]["gsmShades"][price.simpleGsmShade.id] === undefined) {
-                    millPrices[price.mill.id]["gsmShades"][price.simpleGsmShade.id] = {"gsmShade": price.simpleGsmShade, "qualities": {}};
+                if(price.simpleGsmShade === null) {
+                    price.gsmShade = price.derivedGsmShade;
+                } else {
+                    price.gsmShade = price.simpleGsmShade;
+                }
+                if(millPrices[price.mill.id]["gsmShades"][price.gsmShade.id] === undefined) {
+                    millPrices[price.mill.id]["gsmShades"][price.gsmShade.id] = {"gsmShade": price.gsmShade, "qualities": {}};
                 }
                 var qualityLabel = getUpperQuality(price.quality.label);
-                millPrices[price.mill.id]["gsmShades"][price.simpleGsmShade.id]["qualities"][qualityLabel] = price.value;
+                millPrices[price.mill.id]["gsmShades"][price.gsmShade.id]["qualities"][qualityLabel] = price.value;
             }
 
             var results = [];

@@ -5,9 +5,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -24,13 +23,14 @@ public class Formula implements Serializable {
 
     @NotNull
     @Size(min = 1, max = 1)
+    @Pattern(regexp = "[+%]")
     @Column(name = "operator", length = 1, nullable = false)
     private String operator;
-    
+
     @NotNull
     @Column(name = "operand", nullable = false)
     private Float operand;
-    
+
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private Formulae parent;
@@ -46,7 +46,7 @@ public class Formula implements Serializable {
     public String getOperator() {
         return operator;
     }
-    
+
     public void setOperator(String operator) {
         this.operator = operator;
     }
@@ -54,7 +54,7 @@ public class Formula implements Serializable {
     public Float getOperand() {
         return operand;
     }
-    
+
     public void setOperand(Float operand) {
         this.operand = operand;
     }
@@ -94,5 +94,13 @@ public class Formula implements Serializable {
             ", operator='" + operator + "'" +
             ", operand='" + operand + "'" +
             '}';
+    }
+
+    public Float apply(Float value) {
+        if(operator.contentEquals("+")) {
+            return value + operand;
+        } else {
+            return value + (value * (operand / 100));
+        }
     }
 }
