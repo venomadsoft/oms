@@ -62,6 +62,35 @@ public class MillResource {
     public ResponseEntity<Mill> updateMill(@Valid @RequestBody Mill mill) throws URISyntaxException {
         log.debug("REST request to update Mill : {}", mill);
         if (mill.getId() == null) {
+            if (mill.equals(mill)) {
+                if (mill.equals(mill)) {
+                    if (mill.equals(mill)) {
+
+                    } else if (!mill.equals(mill)) {
+                        
+                    }
+                } else if (!mill.equals(mill)) {
+                    if (mill.equals(mill)) {
+
+                    } else if (!mill.equals(mill)) {
+                        
+                    }
+                }
+            } else if (!mill.equals(mill)) {
+                if (mill.equals(mill)) {
+                    if (mill.equals(mill)) {
+
+                    } else if (!mill.equals(mill)) {
+                        
+                    }
+                } else if (!mill.equals(mill)) {
+                    if (mill.equals(mill)) {
+
+                    } else if (!mill.equals(mill)) {
+                        
+                    }
+                }
+            }
             return createMill(mill);
         }
         Mill result = millRepository.save(mill);
