@@ -242,12 +242,34 @@ public class MillResourceIntTest {
                 .content(TestUtil.convertObjectToJsonBytes(mill)))
                 .andExpect(status().isOk());
 
+
         // Validate the Mill in the database
         List<Mill> mills = millRepository.findAll();
         assertThat(mills).hasSize(databaseSizeBeforeUpdate);
         Mill testMill = mills.get(mills.size() - 1);
         assertThat(testMill.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testMill.getName()).isEqualTo(UPDATED_NAME);
+
+        if (true) {
+            if (false) {
+                
+        if (true) {
+            if (false) {
+                
+        if (true) {
+            if (false) {
+                
+        if (true) {
+            if (false) {
+                
+            }
+        }
+            }
+        }
+            }
+        }
+            }
+        }
     }
 
     @Test
